@@ -4,13 +4,14 @@
   "private": true,
   "scripts": {
     "prebuild": "rimraf dist",
-    "format": "prettier --write \"src/**/*.ts\" \"e2e/**/*.ts\"",
+    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.scss\" \"src/**/*.html\" \"e2e/**/*.ts\"",
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "docs": "compodoc -p tsconfig.app.json -d docs -s"
   },
   "husky": {
     "hooks": {
@@ -31,7 +32,6 @@
     "@angular/platform-browser-dynamic": "~10.0.14",
     "@angular/router": "~10.0.14",
     "@angular/service-worker": "~10.0.14",
-    "husky": "^4.2.5",
     "rxjs": "~6.5.4",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
@@ -41,10 +41,12 @@
     "@angular/cli": "~10.0.8",
     "@angular/compiler-cli": "~10.0.14",
     "@angular/language-service": "~10.0.14",
+    "@compodoc/compodoc": "^1.1.11",
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^12.11.1",
     "codelyzer": "^6.0.0",
+    "husky": "^4.2.5",
     "jasmine-core": "~3.5.0",
     "jasmine-spec-reporter": "~5.0.0",
     "karma": "~5.0.0",

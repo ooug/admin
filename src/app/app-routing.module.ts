@@ -68,6 +68,13 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'newsletters',
+        loadChildren: () =>
+          import('./pages/newsletters/newsletters.module').then(
+            m => m.NewslettersModule
+          ),
+      },
+      {
         path: 'first-interaction',
         loadChildren: () =>
           import('./pages/first-interaction/first-interaction.module').then(
@@ -85,6 +92,28 @@ const routes: Routes = [
           import('./pages/notifications/notifications.module').then(
             m => m.NotificationsModule
           ),
+      },
+      {
+        path: 'settings',
+        loadChildren: () =>
+          import('./pages/settings/settings.module').then(
+            m => m.SettingsModule
+          ),
+      },
+      {
+        path: 'help',
+        loadChildren: () =>
+          import('./pages/help/help.module').then(m => m.HelpModule),
+      },
+      {
+        path: 'faq',
+        loadChildren: () =>
+          import('./pages/faq/faq.module').then(m => m.FaqModule),
+      },
+      {
+        path: 'docs',
+        loadChildren: () =>
+          import('./pages/docs/docs.module').then(m => m.DocsModule),
       },
     ],
   },

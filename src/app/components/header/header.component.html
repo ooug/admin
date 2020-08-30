@@ -8,26 +8,28 @@
     <div fxFlex fxLayout="row" fxLayoutAlign="flex-end">
       <ul fxLayout="row" fxLayoutGap="20px">
         <li>
-          <button mat-icon-button>
+          <a mat-menu-item routerLink="/settings">
             <mat-icon>settings</mat-icon>
-          </button>
-        </li>
-        <li>
-          <button mat-icon-button>
-            <mat-icon>help_outline</mat-icon>
-          </button>
+          </a>
         </li>
         <li>
           <button mat-button [matMenuTriggerFor]="menu">
             <mat-icon>person_outline</mat-icon>
           </button>
           <mat-menu #menu="matMenu">
+            <a mat-menu-item routerLink="/profile/santosh123">
+              <mat-icon>person</mat-icon>
+              Profile
+            </a>
+            <a mat-menu-item routerLink="/profile/santosh123/change-password">
+              <mat-icon>security</mat-icon>
+              Change password
+            </a>
             <button mat-menu-item>
               <mat-icon>exit_to_app</mat-icon>
               Sign out
             </button>
           </mat-menu>
-
         </li>
       </ul>
     </div>

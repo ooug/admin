@@ -5,7 +5,7 @@ import {GalleryRoutingModule} from './gallery-routing.module';
 import {GalleryComponent} from './gallery.component';
 
 @NgModule({
-  declarations: [GalleryComponent],
+  declarations: [],
   imports: [CommonModule, GalleryRoutingModule],
 })
 export class GalleryModule {}
