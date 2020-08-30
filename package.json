@@ -11,11 +11,11 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "docs": "compodoc -p tsconfig.app.json -d docs -s"
+    "docs": "compodoc -p tsconfig.app.json -d docs"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn format && git add ."
+      "pre-commit": "yarn format && yarn docs && git add ."
     }
   },
   "dependencies": {
