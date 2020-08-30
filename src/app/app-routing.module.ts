@@ -43,6 +43,49 @@ const routes: Routes = [
         loadChildren: () =>
           import('./pages/blog/blog.module').then(m => m.BlogModule),
       },
+      {
+        path: 'gallery',
+        loadChildren: () =>
+          import('./pages/gallery/gallery.module').then(m => m.GalleryModule),
+      },
+      {
+        path: 'activity',
+        loadChildren: () =>
+          import('./pages/activity/activity.module').then(
+            m => m.ActivityModule
+          ),
+      },
+      {
+        path: 'events',
+        loadChildren: () =>
+          import('./pages/events/events.module').then(m => m.EventsModule),
+      },
+      {
+        path: 'contacts',
+        loadChildren: () =>
+          import('./pages/contacts/contacts.module').then(
+            m => m.ContactsModule
+          ),
+      },
+      {
+        path: 'first-interaction',
+        loadChildren: () =>
+          import('./pages/first-interaction/first-interaction.module').then(
+            m => m.FirstInteractionModule
+          ),
+      },
+      {
+        path: 'members',
+        loadChildren: () =>
+          import('./pages/members/members.module').then(m => m.MembersModule),
+      },
+      {
+        path: 'notifications',
+        loadChildren: () =>
+          import('./pages/notifications/notifications.module').then(
+            m => m.NotificationsModule
+          ),
+      },
     ],
   },
 ];
