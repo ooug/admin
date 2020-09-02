@@ -1,0 +1,40 @@
+<style>
+  th,
+  td {
+    padding: 10px;
+  }
+</style>
+
+<h2 mat-dialog-title>{{event?.title}} Registrations</h2>
+<hr style="color: aliceblue" />
+<div mat-dialog-subtitle>
+  Total No of Registrations:
+  {{event?.registration?event?.registration.length:0}}
+</div>
+<mat-dialog-content class="mat-typography">
+  <table
+    style="width: 100%; border-collapse: collapse; border-color: aliceblue"
+    border="1"
+  >
+    <tr>
+      <th>Sl No</th>
+      <th>Name</th>
+      <th>Roll</th>
+      <th>Mobile</th>
+      <th>Email</th>
+    </tr>
+    <tr *ngFor="let reg of event?.registration; let i = index;">
+      <td>{{i+1}}</td>
+      <td>{{reg.name}}</td>
+      <td>{{reg.roll}}</td>
+      <td>{{reg.mobile}}</td>
+      <td>{{reg.email}}</td>
+    </tr>
+  </table>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-raised-button color="accent">Export to PDF</button>
+  <button mat-raised-button color="accent">Export to Excel</button>
+  <button mat-raised-button color="accent">Export to CSV</button>
+</mat-dialog-actions>

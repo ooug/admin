@@ -28,7 +28,20 @@
         </tr>
         <tr>
           <th>Enable Registration?</th>
-          <td>{{ event.enableRegistration ? 'Enabled' : 'Not Enabled' }}</td>
+          <td>
+            {{
+              event.enableRegistration ? 'Enabled' : 'Not Enabled'
+            }}
+            &nbsp;&nbsp;
+            <button
+              *ngIf="event.enableRegistration"
+              (click)="showRegistrations(event._id)"
+              mat-raised-button
+              color="accent"
+            >
+              Show Registration
+            </button>
+          </td>
         </tr>
         <tr>
           <th>Short Description</th>
@@ -43,7 +56,14 @@
             <button mat-raised-button color="accent">Edit</button>
           </td>
           <td>
-            <button mat-raised-button color="warn">Delete</button>
+            <button
+              type="button"
+              (click)="deleteEvent(event._id)"
+              mat-raised-button
+              color="warn"
+            >
+              Delete
+            </button>
           </td>
         </tr>
       </table>

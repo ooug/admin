@@ -21,4 +21,38 @@ export class EventsService {
         });
     });
   }
+
+  public getRegistration(eventId: string) {
+    return new Promise((resolve, reject) => {
+      this.http
+        .get(environment.server + '/upcoming-event/registrations/' + eventId)
+        .subscribe((data: any) => {
+          if (data.status) {
+            resolve(data.data);
+          } else {
+            reject(data);
+          }
+        });
+    });
+  }
+
+  public getOneUpcomingEvent(eventId: string) {
+    return new Promise((resolve, reject) => {
+      this.http
+        .get(environment.server + '/upcoming-event/get-one/' + eventId)
+        .subscribe((data: any) => {
+          if (data.status) {
+            resolve(data.data);
+          } else {
+            reject(data);
+          }
+        });
+    });
+  }
+
+  public deleteOneEvent(eventId: string) {
+    // return new Promise((resolve, reject) => {
+    //   this.http.delete(environment.server + '/upcoming-event/delete-one',);
+    // });
+  }
 }
