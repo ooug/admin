@@ -62,11 +62,32 @@
           </td>
         </tr>
       </table>
-      <mat-form-field color="accent" style="width: 100%">
-        <mat-label>Image URL</mat-label>
-        <input formControlName="url" matInput placeholder="URL" />
-        <!-- <mat-hint>Hint</mat-hint> -->
-      </mat-form-field>
+      <table>
+        <tr>
+          <td>
+            <mat-form-field color="accent" style="width: 100%">
+              <mat-label>Image URL Host</mat-label>
+              <input
+                formControlName="imageHost"
+                matInput
+                placeholder="URL Host"
+              />
+              <!-- <mat-hint>Hint</mat-hint> -->
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field color="accent" style="width: 100%">
+              <mat-label>Image URL Path</mat-label>
+              <input
+                formControlName="imagePath"
+                matInput
+                placeholder="URL Path"
+              />
+              <!-- <mat-hint>Hint</mat-hint> -->
+            </mat-form-field>
+          </td>
+        </tr>
+      </table>
       <mat-slide-toggle color="accent" formControlName="enableRegistration"
         >Enable Registration</mat-slide-toggle
       >
@@ -75,6 +96,6 @@
 </div>
 
 <mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button (click)="closeDialog()">Cancel</button>
   <button (click)="addEvent()" mat-raised-button color="accent">Save</button>
 </mat-dialog-actions>

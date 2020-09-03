@@ -13,6 +13,6 @@ export class EventsComponent implements OnInit {
   ngOnInit(): void {}
 
   public addNewEvent() {
-    this.dialog.open(AddEventComponent);
+    this.dialog.open(AddEventComponent, {disableClose: true});
   }
 }
