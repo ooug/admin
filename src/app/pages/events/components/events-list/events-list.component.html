@@ -29,9 +29,7 @@
         <tr>
           <th>Enable Registration?</th>
           <td>
-            {{
-              event.enableRegistration ? 'Enabled' : 'Not Enabled'
-            }}
+            {{ event.enableRegistration ? 'Enabled' : 'Not Enabled' }}
             &nbsp;&nbsp;
             <button
               *ngIf="event.enableRegistration"

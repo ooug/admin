@@ -11,6 +11,11 @@ import {CommonModule} from '@angular/common';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDialogModule} from '@angular/material/dialog';
+import {AddEventComponent} from './components/add-event/add-event.component';
+import {ReactiveFormsModule} from '@angular/forms';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 const routes: Routes = [
   {
@@ -24,6 +29,7 @@ const routes: Routes = [
     EventsComponent,
     EventsListComponent,
     DialogEventRegistrations,
+    AddEventComponent,
   ],
   imports: [
     CommonModule,
@@ -32,6 +38,10 @@ const routes: Routes = [
     MatCardModule,
     MatButtonModule,
     MatDialogModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSlideToggleModule,
   ],
   exports: [RouterModule],
   entryComponents: [DialogEventRegistrations],

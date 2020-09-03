@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {EventsService} from './events.service';
+import {MatDialog} from '@angular/material/dialog';
+import {AddEventComponent} from './components/add-event/add-event.component';
 
 @Component({
   selector: 'ooug-events',
@@ -7,7 +8,11 @@ import {EventsService} from './events.service';
   styleUrls: ['./events.component.scss'],
 })
 export class EventsComponent implements OnInit {
-  constructor() {}
+  constructor(private dialog: MatDialog) {}
 
   ngOnInit(): void {}
+
+  public addNewEvent() {
+    this.dialog.open(AddEventComponent);
+  }
 }
