@@ -16,6 +16,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {UpdateEventComponent} from './components/update-event/update-event.component';
 
 const routes: Routes = [
   {
@@ -30,6 +31,7 @@ const routes: Routes = [
     EventsListComponent,
     DialogEventRegistrations,
     AddEventComponent,
+    UpdateEventComponent,
   ],
   imports: [
     CommonModule,

@@ -1,6 +1,7 @@
 import {Component, OnInit, Inject} from '@angular/core';
 import {EventsService} from '../../events.service';
 import {MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {UpdateEventComponent} from '../update-event/update-event.component';
 
 @Component({
   selector: 'ooug-events-list',
@@ -16,6 +17,13 @@ export class EventsListComponent implements OnInit {
 
   public showRegistrations(id: string) {
     this.dialog.open(DialogEventRegistrations, {data: {eventId: id}});
+  }
+
+  public updateEvent(id: string) {
+    this.dialog.open(UpdateEventComponent, {
+      data: {eventId: id},
+      disableClose: true,
+    });
   }
 
   public deleteEvent(eventId: string) {

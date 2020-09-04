@@ -51,7 +51,14 @@
         </tr>
         <tr>
           <td>
-            <button mat-raised-button color="accent">Edit</button>
+            <button
+              type="button"
+              (click)="updateEvent(event._id)"
+              mat-raised-button
+              color="accent"
+            >
+              Edit
+            </button>
           </td>
           <td>
             <button
