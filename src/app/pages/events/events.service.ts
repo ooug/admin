@@ -77,4 +77,21 @@ export class EventsService {
         });
     });
   }
+
+  public updateEvent(id: string, eventData: any) {
+    return new Promise((resolve, reject) => {
+      this.http
+        .post(environment.server + '/upcoming-event/update-one', {
+          eventId: id,
+          event: eventData,
+        })
+        .subscribe((data: any) => {
+          if (data.status) {
+            resolve(data);
+          } else {
+            reject(data);
+          }
+        });
+    });
+  }
 }

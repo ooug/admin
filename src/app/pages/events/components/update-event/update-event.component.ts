@@ -80,7 +80,7 @@ export class UpdateEventComponent implements OnInit {
 
   public updateEvent() {
     const dt = new Date(this.updateEventForm.value.dateTime);
-    const newEvent: any = {
+    const updatedEvent: any = {
       title: this.updateEventForm.value.title,
       Image: {
         host: this.updateEventForm.value.imageHost,
@@ -97,7 +97,15 @@ export class UpdateEventComponent implements OnInit {
       },
       time: this.formatAMPM(dt),
     };
-    console.log(newEvent);
+    this.eventService
+      .updateEvent(this.data.eventId, updatedEvent)
+      .then(() => {
+        this.dialogRef.close();
+        alert('Event Updated!!!');
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 
   private formatAMPM(date: any) {
