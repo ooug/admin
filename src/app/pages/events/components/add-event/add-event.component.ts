@@ -49,8 +49,8 @@ export class AddEventComponent implements OnInit {
     this.eventService
       .addEvent(newEvent)
       .then(data => {
-        alert('Event successfully created!');
         this.dialogRef.close();
+        alert('Event successfully created!');
       })
       .catch(err => {
         console.log(err);

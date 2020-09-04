@@ -20,7 +20,14 @@ export class EventsListComponent implements OnInit {
 
   public deleteEvent(eventId: string) {
     if (confirm('Are you sure?')) {
-      console.log('deleted');
+      this.eventsService
+        .deleteOneEvent(eventId)
+        .then(data => {
+          alert('Event Deleted!');
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
   }
 

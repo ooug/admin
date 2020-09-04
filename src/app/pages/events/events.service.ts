@@ -51,9 +51,17 @@ export class EventsService {
   }
 
   public deleteOneEvent(eventId: string) {
-    // return new Promise((resolve, reject) => {
-    //   this.http.delete(environment.server + '/upcoming-event/delete-one',);
-    // });
+    return new Promise((resolve, reject) => {
+      this.http
+        .post(environment.server + '/upcoming-event/delete-one', {id: eventId})
+        .subscribe((data: any) => {
+          if (data.status) {
+            resolve(data);
+          } else {
+            reject(data);
+          }
+        });
+    });
   }
 
   public addEvent(event: any) {
