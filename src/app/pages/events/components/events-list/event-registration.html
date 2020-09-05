@@ -35,7 +35,9 @@
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-raised-button color="accent">Export to PDF</button>
+  <button mat-raised-button (click)="exportToPDF()" color="accent">
+    Export to PDF
+  </button>
   <button mat-raised-button color="accent">Export to Excel</button>
   <button mat-raised-button color="accent">Export to CSV</button>
 </mat-dialog-actions>

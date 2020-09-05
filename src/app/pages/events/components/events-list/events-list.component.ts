@@ -2,6 +2,7 @@ import {Component, OnInit, Inject} from '@angular/core';
 import {EventsService} from '../../events.service';
 import {MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {UpdateEventComponent} from '../update-event/update-event.component';
+import {jsPDF} from 'jspdf';
 
 @Component({
   selector: 'ooug-events-list',
@@ -62,7 +63,7 @@ export class DialogEventRegistrations implements OnInit {
     private eventsService: EventsService
   ) {}
 
-  public event;
+  public event: any;
 
   ngOnInit() {
     this.eventsService
@@ -82,5 +83,59 @@ export class DialogEventRegistrations implements OnInit {
       .catch(err => {
         console.log(err);
       });
+  }
+
+  public exportToPDF() {
+    const doc = new jsPDF();
+    let y = 20;
+
+    doc
+      .setFontSize(30)
+      .text('ODISHA ORACLE USERS GROUP', 105, y, {align: 'center'});
+    y += 12;
+    doc
+      .setFontSize(22)
+      .text(this.event.title + ' Registrations', 105, y, {align: 'center'});
+    y += 7;
+    doc
+      .setFontSize(12)
+      .setTextColor('gray')
+      .text(
+        'On ' +
+          this.event.Date.day +
+          '-' +
+          this.event.Date.month +
+          '-' +
+          this.event.Date.year +
+          ' ' +
+          this.event.time +
+          '   Venue: ' +
+          this.event.venue,
+        105,
+        y,
+        {align: 'center'}
+      );
+
+    y += 7;
+
+    doc.setTextColor('black').cell(10, y, 15, 8, 'Sl', 0, 'center');
+    doc.setTextColor('black').cell(25, y, 50, 8, 'Name', 0, 'center');
+    doc.setTextColor('black').cell(75, y, 25, 8, 'Roll No', 0, 'center');
+    doc.setTextColor('black').cell(100, y, 60, 8, 'Email', 0, 'center');
+    doc.setTextColor('black').cell(160, y, 40, 8, 'Mobile', 0, 'center');
+
+    this.event.registration.forEach((e: any, i: number) => {
+      y += 7;
+      doc.setFontSize(9);
+      doc
+        .setTextColor('black')
+        .cell(10, y, 15, 10, (i + 1).toString(), i + 1, 'center');
+      doc.setTextColor('black').cell(25, y, 50, 10, e.name, i + 1, 'center');
+      doc.setTextColor('black').cell(75, y, 25, 10, e.roll, i + 1, 'center');
+      doc.setTextColor('black').cell(100, y, 60, 10, e.email, i + 1, 'center');
+      doc.setTextColor('black').cell(160, y, 40, 10, e.mobile, i + 1, 'center');
+    });
+
+    window.open(String(doc.output('bloburl')));
   }
 }
