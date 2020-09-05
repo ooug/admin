@@ -3,6 +3,7 @@ import {EventsService} from '../../events.service';
 import {MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {UpdateEventComponent} from '../update-event/update-event.component';
 import {jsPDF} from 'jspdf';
+import exportFromJSON from 'export-from-json';
 
 @Component({
   selector: 'ooug-events-list',
@@ -137,5 +138,37 @@ export class DialogEventRegistrations implements OnInit {
     });
 
     window.open(String(doc.output('bloburl')));
+  }
+
+  public exportToExcel() {
+    const dataExport = this.event.registration.map(e => {
+      return {
+        name: e.name,
+        roll: e.roll,
+        email: e.email,
+        mobile: e.mobile,
+      };
+    });
+    exportFromJSON({
+      data: dataExport,
+      fileName: this.event.title + '_Registrations',
+      exportType: 'xls',
+    });
+  }
+
+  public exportToCSV() {
+    const dataExport = this.event.registration.map(e => {
+      return {
+        name: e.name,
+        roll: e.roll,
+        email: e.email,
+        mobile: e.mobile,
+      };
+    });
+    exportFromJSON({
+      data: dataExport,
+      fileName: this.event.title + '_Registrations',
+      exportType: 'csv',
+    });
   }
 }

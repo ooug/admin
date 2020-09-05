@@ -35,9 +35,28 @@
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-raised-button (click)="exportToPDF()" color="accent">
+  <button
+    mat-raised-button
+    *ngIf="event?.registration"
+    (click)="exportToPDF()"
+    color="accent"
+  >
     Export to PDF
   </button>
-  <button mat-raised-button color="accent">Export to Excel</button>
-  <button mat-raised-button color="accent">Export to CSV</button>
+  <button
+    mat-raised-button
+    *ngIf="event?.registration"
+    (click)="exportToExcel()"
+    color="accent"
+  >
+    Export to Excel
+  </button>
+  <button
+    mat-raised-button
+    *ngIf="event?.registration"
+    (click)="exportToCSV()"
+    color="accent"
+  >
+    Export to CSV
+  </button>
 </mat-dialog-actions>
