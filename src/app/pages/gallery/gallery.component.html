@@ -41,9 +41,56 @@
                 </div>
             </mat-tab>
 
-            <mat-tab id="tab__labels" label="Actions">
+            <mat-tab>
+              <ng-template mat-tab-label>
+                <h3 class="tab__labels">create</h3>
+            </ng-template>
                 <div class="actions-box mat-elevation-z4 ">
-                    form here
+                    
+                    <!-- <div style="text-align: center;">
+                        <h1 style="color: red;">
+                          Welcome TO Odisha Oracle Users Group 
+                        </h1>
+                        
+                        
+                        </div> -->
+                        <mat-card >
+                          <br>
+                          <form class="example-form" >
+                            <mat-form-field class="example-full-width">
+                              <mat-label>Name Of the Event</mat-label>
+                              <input matInput placeholder="Example Workshop" >
+                            </mat-form-field>
+                            <br>
+                            <label class="example-margin">Type Of an Event &nbsp; </label>
+                              <mat-radio-group>
+                                <mat-radio-button class="example-margin" value="tech">Technical Events &nbsp;</mat-radio-button>
+                                <mat-radio-button class="example-margin" value="non">Non Technical Events</mat-radio-button>
+                                
+                              </mat-radio-group>
+                            
+                            <mat-form-field class="example-full-width">
+                              <mat-label> Description Of an Event</mat-label>
+                              <textarea matInput placeholder="Give the Brief Description of an event........"></textarea>
+                            </mat-form-field>
+                            <mat-form-field class="example-full-width">
+                              <mat-label>Date Of an Event....</mat-label>
+                              <input type="date" matInput placeholder="Choose the date from the calendar.." >
+                            </mat-form-field>
+                            <mat-form-field class="example-full-width">
+                              <mat-label>Name Of the Cordinator</mat-label>
+                              <input matInput placeholder="Name of the cordinator connecting with event" >
+                            </mat-form-field>
+                            <label for="upload">Upload Your Image into the gallery</label><br><br>
+                            <input type="file" id="myFile" name="filename">
+                            <br><br><br>
+                            <button mat-raised-button color="primary">Submit</button>
+                          </form>
+                          
+                          
+                        </mat-card>
+
+
                 </div>
             </mat-tab>
         </mat-tab-group>
