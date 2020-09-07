@@ -1,12 +1,12 @@
 // @import '~/@angular/material/prebuild-themes/indigo-pink.css';
-.tab__labels{
-    color: #131313;
-    text-align: center;
-    font-weight: 600;
-    font-size: large;
-    letter-spacing: 2px;
-    margin:0;
-  }
+.tab__labels {
+  color: #080201;
+  text-align: center;
+  font-weight: 600;
+  font-size: large;
+  letter-spacing: 2px;
+  margin: 0;
+}
 .container {
   width: 80vw;
 }
@@ -16,12 +16,11 @@
   margin-bottom: 70px;
   width: 100%;
 }
-.mat_card{
+.mat_card {
   margin: 15px;
   padding: 26px;
-  min-width:150px;
+  min-width: 150px;
   flex-grow: 1;
-
 }
 
 .image-box,
@@ -32,12 +31,10 @@
   margin: 16px;
   padding: 16px;
   border-radius: 8px;
-  
 }
 
-
-@media (max-width:768px){
-  .cards{
+@media (max-width: 768px) {
+  .cards {
     flex-direction: column;
     margin: 20px;
   }
