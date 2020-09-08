@@ -1,226 +1,156 @@
-<br />
-<div class="row">
-  <div class="col-md-3">
-    <b style="font-size: 20px">Welcome to Activity Page</b><br />
-    simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-    been the industry's standard dummy text ever since the 1500s, when an
-    unknown printer took a galley of type and scrambled it to make a type
-    specimen book. It has survived not only five centuries
-  </div>
-  <div class="col-md-8 box">
-    <div class="row operation1">
-      <div class="col-md-4 cursor">
-        <a
-          class="btn btn-lg btn-outline-primary"
-          (click)="open(content1)"
-          style="margin: 0; padding: 0"
-        >
-          <img src="assets/images/1.jpg" height="100px" width="100%" />
-        </a>
-        <ng-template #content1 let-modal>
-          <div class="modal-header">
-            <h4 class="modal-title" id="modal-basic-title">Profile update 1</h4>
-            <button
-              type="button"
-              class="close"
-              aria-label="Close"
-              (click)="modal.dismiss('Cross click')"
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-        </ng-template>
-      </div>
-      <div class="col-md-4 cursor">
-        <a
-          class="btn btn-lg btn-outline-primary"
-          (click)="open(content2)"
-          style="margin: 0; padding: 0"
-        >
-          <img src="assets/images/1.jpg" height="100px" width="100%" />
-        </a>
-        <ng-template #content2 let-modal>
-          <div class="modal-header">
-            <h4 class="modal-title" id="modal-basic-title">Profile update 2</h4>
-            <button
-              type="button"
-              class="close"
-              aria-label="Close"
-              (click)="modal.dismiss('Cross click')"
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-        </ng-template>
-      </div>
-      <div class="col-md-4 cursor">
-        <a
-          class="btn btn-lg btn-outline-primary"
-          (click)="open(content3)"
-          style="margin: 0; padding: 0"
-        >
-          <img src="assets/images/1.jpg" height="100px" width="100%" />
-        </a>
-        <ng-template #content3 let-modal>
-          <div class="modal-header">
-            <h4 class="modal-title" id="modal-basic-title">Profile update 3</h4>
-            <button
-              type="button"
-              class="close"
-              aria-label="Close"
-              (click)="modal.dismiss('Cross click')"
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-        </ng-template>
-      </div>
-    </div>
-    <div class="row operation2">
-      <div class="col-md-4 cursor">
-        <a
-          class="btn btn-lg btn-outline-primary"
-          (click)="open(content4)"
-          style="margin: 0; padding: 0"
-        >
-          <img src="assets/images/1.jpg" height="100px" width="100%" />
-        </a>
-        <ng-template #content4 let-modal>
-          <div class="modal-header">
-            <h4 class="modal-title" id="modal-basic-title">Profile update 4</h4>
-            <button
-              type="button"
-              class="close"
-              aria-label="Close"
-              (click)="modal.dismiss('Cross click')"
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-        </ng-template>
-      </div>
-      <div class="col-md-4 cursor">
-        <a
-          class="btn btn-lg btn-outline-primary"
-          (click)="open(content5)"
-          style="margin: 0; padding: 0"
-        >
-          <img src="assets/images/1.jpg" height="100px" width="100%" />
-        </a>
-        <ng-template #content5 let-modal>
-          <div class="modal-header">
-            <h4 class="modal-title" id="modal-basic-title">Profile update 5</h4>
-            <button
-              type="button"
-              class="close"
-              aria-label="Close"
-              (click)="modal.dismiss('Cross click')"
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-        </ng-template>
-      </div>
-      <div class="col-md-4 cursor">
-        <a
-          class="btn btn-lg btn-outline-primary"
-          (click)="open(content6)"
-          style="margin: 0; padding: 0"
-        >
-          <img src="assets/images/1.jpg" height="100px" width="100%" />
-        </a>
-        <ng-template #content6 let-modal>
-          <div class="modal-header">
-            <h4 class="modal-title" id="modal-basic-title">Profile update 6</h4>
-            <button
-              type="button"
-              class="close"
-              aria-label="Close"
-              (click)="modal.dismiss('Cross click')"
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-        </ng-template>
-      </div>
-    </div>
-  </div>
-</div>
-
-<br /><br />
-<div class="container">
-  <b style="font-size: 20px">Latest modifications</b>
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th>Date</th>
-        <th>Image</th>
-        <th>Detail</th>
-        <th>Operation</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>22-12-2020</td>
-        <td>AA</td>
-        <td>when an unknown printer took</td>
-        <td>deletion</td>
-      </tr>
-      <tr>
-        <td>19-02-2020</td>
-        <td>AA</td>
-        <td>a galley of type and scrambled</td>
-        <td>Update</td>
-      </tr>
-      <tr>
-        <td>30-05-2020</td>
-        <td>AA</td>
-        <td>it to make a type specimen book.</td>
-        <td>Insertion</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
-<ng-template #content let-modal>
-  <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
-    <button
-      type="button"
-      class="close"
-      aria-label="Close"
-      (click)="modal.dismiss('Cross click')"
-    >
-      <span aria-hidden="true">&times;</span>
+<div class="head">
+  <h1><strong>Welcome to Activity Page</strong></h1>
+  <p>
+    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Blanditiis omnis
+    maxime fugit veritatis cum ad accusamus deserunt autem veniam ipsum.
+  </p>
+  <br /><br />
+  <div style="text-align: center">
+    <button (click)="open(upload)" class="btn btn-primary add-activity">
+      Add Activity
     </button>
   </div>
-  <div class="modal-body">
-    <form>
-      <div class="form-group">
-        <label for="dateOfBirth">Date of birth</label>
-        <div class="input-group">
-          <input
-            id="dateOfBirth"
-            class="form-control"
-            placeholder="yyyy-mm-dd"
-          />
-          <div class="input-group-append">
-            <button
-              class="btn btn-outline-secondary calendar"
-              type="button"
-            ></button>
+  <ng-template #upload let-modal>
+    <div class="modal-header" style="background-color: rgb(7, 51, 51)">
+      <h5 class="modal-title" id="modal-basic-title">
+        Insert Activity Details
+      </h5>
+      <button
+        type="button"
+        class="modal-cross"
+        aria-label="Close"
+        (click)="modal.dismiss('Cross click')"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body" style="background-color: rgb(7, 51, 51)">
+      <form>
+        <!---------------------image section---------------------->
+        <div
+          *ngIf="url === ''"
+          style="height: 200px; text-align: center; padding-top: 5%"
+        >
+          <label for="file">
+            <img
+              src="assets/icons/file-upload-solid.svg"
+              height="40%"
+              width="40%"
+            /><br />
+            <strong>There is no file selected!</strong>
+            <p>Select an image...</p>
+          </label>
+        </div>
+        <div *ngIf="url !== ''">
+          <img src="{{ url }}" height="200px" width="100%" />
+        </div>
+        <hr />
+        <input type="file" id="file" (change)="onselect($event)" />
+        <div *ngIf="url !== ''" style="text-align: center">
+          <label for="file" class="upload-button">change Image</label>
+        </div>
+        <!----------------------------------------------->
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="type">Event Type :</label>
+              <select class="form-control" id="type">
+                <option>Workshop</option>
+                <option>Techbhukkads</option>
+                <option>celebration</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="by">Organized By :</label>
+              <input
+                type="email"
+                id="by"
+                class="form-control"
+                placeholder="Organized By"
+              />
+            </div>
+            <div class="form-group">
+              <label for="at">Organized At :</label>
+              <input
+                type="email"
+                id="at"
+                class="form-control"
+                placeholder="Organized At"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="detail">Event Detail :</label>
+          <textarea
+            class="form-control rounded-0"
+            id="detail"
+            rows="4"
+            placeholder="Event Detail..."
+          ></textarea>
+        </div>
+        <input
+          type="submit"
+          value="Submit details"
+          class="btn btn-primary btn-submit"
+        />
+      </form>
+    </div>
+  </ng-template>
+
+  <br />
+</div>
+
+<div class="recent-activities">
+  <h1><strong style="margin-left: 10px">Recent Activities</strong></h1>
+  <div class="row">
+    <div class="col-lg-4 col-md-4" *ngFor="let event of updatedEvent">
+      <div class="card shadow rounded">
+        <div class="row">
+          <div class="col-6" style="height: 110px">
+            <img
+              src="{{ event.image }}"
+              alt="background"
+              height="100%"
+              width="100%"
+            />
+          </div>
+          <div class="col-6" style="height: 110px">
+            <p>
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+              Accusantium, tempora.
+            </p>
           </div>
         </div>
       </div>
-    </form>
+    </div>
   </div>
-  <div class="modal-footer">
-    <button
-      type="button"
-      class="btn btn-outline-dark"
-      (click)="modal.close('Save click')"
-    >
-      Save
-    </button>
+</div>
+
+<div class="all-activities">
+  <div class="row">
+    <div class="col-10">
+      <h1><strong style="margin-left: 10px"> All Activities </strong></h1>
+    </div>
+    <div class="col-2">sort by</div>
   </div>
-</ng-template>
+  <div class="row">
+    <div class="col-lg-4 col-md-4" *ngFor="let event of allEvents">
+      <div class="card shadow rounded">
+        <img
+          src="{{ event.image }}"
+          alt="background"
+          height="90%"
+          width="100%"
+        />
+        <p class="p-2">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus,
+          quis?
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
