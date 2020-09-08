@@ -35,6 +35,15 @@
         <code>Enter</code> will insert a new paragraph.
         <code>Shift+Enter</code> will insert a new line.
       </div>
+      <br />
+      Attachment:
+      <input
+        type="file"
+        onclick="this.value = null"
+        (change)="onFileChange($event)"
+        formControlName="file"
+      />
+      (Max 5MB)
     </form>
   </mat-card-content>
 

@@ -22,12 +22,17 @@ export class NewsletterService {
     });
   }
 
-  public sendNewsletter(htmlData: string, subjectData: string) {
+  public sendNewsletter(
+    htmlData: string,
+    subjectData: string,
+    attachmentData: any = null
+  ) {
     return new Promise((resolve, reject) => {
       this.http
         .post(environment.server + '/app/send-newsletter', {
           html: htmlData,
           subject: subjectData,
+          file: attachmentData,
         })
         .subscribe((data: any) => {
           if (data.status) {
