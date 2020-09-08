@@ -1,1 +1,46 @@
-<p>newsletters works!</p>
+<div *ngIf="isLoading">
+  <mat-spinner
+    style="margin: 10px auto"
+    color="accent"
+    diameter="50"
+  ></mat-spinner>
+</div>
+
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Send Newsletter</mat-card-title>
+    <mat-card-subtitle
+      >No Of Newsletter Subscriptions:
+      {{ subscriptions?.length }}</mat-card-subtitle
+    >
+  </mat-card-header>
+
+  <mat-card-content>
+    <form [formGroup]="sendNewsletterForm">
+      <mat-form-field color="accent" style="width: 100%">
+        <mat-label>Newsletter Subject</mat-label>
+        <input
+          required
+          formControlName="subject"
+          matInput
+          placeholder="Subject Line"
+        />
+        <mat-error *ngIf="sendNewsletterForm.value.subject === ''"
+          >Required</mat-error
+        >
+      </mat-form-field>
+      NewLetter Content:
+      <ckeditor style="height: 100px" formControlName="html"></ckeditor>
+      <div style="margin-top: 3px">
+        <code>Enter</code> will insert a new paragraph.
+        <code>Shift+Enter</code> will insert a new line.
+      </div>
+    </form>
+  </mat-card-content>
+
+  <mat-card-actions>
+    <button mat-raised-button color="accent" (click)="sendNewsletter()">
+      Send NewsLetter
+    </button>
+  </mat-card-actions>
+</mat-card>
