@@ -1,1 +1,226 @@
-<p>activity works!</p>
+<br />
+<div class="row">
+  <div class="col-md-3">
+    <b style="font-size: 20px">Welcome to Activity Page</b><br />
+    simply dummy text of the printing and typesetting industry. Lorem Ipsum has
+    been the industry's standard dummy text ever since the 1500s, when an
+    unknown printer took a galley of type and scrambled it to make a type
+    specimen book. It has survived not only five centuries
+  </div>
+  <div class="col-md-8 box">
+    <div class="row operation1">
+      <div class="col-md-4 cursor">
+        <a
+          class="btn btn-lg btn-outline-primary"
+          (click)="open(content1)"
+          style="margin: 0; padding: 0"
+        >
+          <img src="assets/images/1.jpg" height="100px" width="100%" />
+        </a>
+        <ng-template #content1 let-modal>
+          <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Profile update 1</h4>
+            <button
+              type="button"
+              class="close"
+              aria-label="Close"
+              (click)="modal.dismiss('Cross click')"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        </ng-template>
+      </div>
+      <div class="col-md-4 cursor">
+        <a
+          class="btn btn-lg btn-outline-primary"
+          (click)="open(content2)"
+          style="margin: 0; padding: 0"
+        >
+          <img src="assets/images/1.jpg" height="100px" width="100%" />
+        </a>
+        <ng-template #content2 let-modal>
+          <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Profile update 2</h4>
+            <button
+              type="button"
+              class="close"
+              aria-label="Close"
+              (click)="modal.dismiss('Cross click')"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        </ng-template>
+      </div>
+      <div class="col-md-4 cursor">
+        <a
+          class="btn btn-lg btn-outline-primary"
+          (click)="open(content3)"
+          style="margin: 0; padding: 0"
+        >
+          <img src="assets/images/1.jpg" height="100px" width="100%" />
+        </a>
+        <ng-template #content3 let-modal>
+          <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Profile update 3</h4>
+            <button
+              type="button"
+              class="close"
+              aria-label="Close"
+              (click)="modal.dismiss('Cross click')"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+    <div class="row operation2">
+      <div class="col-md-4 cursor">
+        <a
+          class="btn btn-lg btn-outline-primary"
+          (click)="open(content4)"
+          style="margin: 0; padding: 0"
+        >
+          <img src="assets/images/1.jpg" height="100px" width="100%" />
+        </a>
+        <ng-template #content4 let-modal>
+          <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Profile update 4</h4>
+            <button
+              type="button"
+              class="close"
+              aria-label="Close"
+              (click)="modal.dismiss('Cross click')"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        </ng-template>
+      </div>
+      <div class="col-md-4 cursor">
+        <a
+          class="btn btn-lg btn-outline-primary"
+          (click)="open(content5)"
+          style="margin: 0; padding: 0"
+        >
+          <img src="assets/images/1.jpg" height="100px" width="100%" />
+        </a>
+        <ng-template #content5 let-modal>
+          <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Profile update 5</h4>
+            <button
+              type="button"
+              class="close"
+              aria-label="Close"
+              (click)="modal.dismiss('Cross click')"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        </ng-template>
+      </div>
+      <div class="col-md-4 cursor">
+        <a
+          class="btn btn-lg btn-outline-primary"
+          (click)="open(content6)"
+          style="margin: 0; padding: 0"
+        >
+          <img src="assets/images/1.jpg" height="100px" width="100%" />
+        </a>
+        <ng-template #content6 let-modal>
+          <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Profile update 6</h4>
+            <button
+              type="button"
+              class="close"
+              aria-label="Close"
+              (click)="modal.dismiss('Cross click')"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>
+
+<br /><br />
+<div class="container">
+  <b style="font-size: 20px">Latest modifications</b>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Image</th>
+        <th>Detail</th>
+        <th>Operation</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>22-12-2020</td>
+        <td>AA</td>
+        <td>when an unknown printer took</td>
+        <td>deletion</td>
+      </tr>
+      <tr>
+        <td>19-02-2020</td>
+        <td>AA</td>
+        <td>a galley of type and scrambled</td>
+        <td>Update</td>
+      </tr>
+      <tr>
+        <td>30-05-2020</td>
+        <td>AA</td>
+        <td>it to make a type specimen book.</td>
+        <td>Insertion</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <label for="dateOfBirth">Date of birth</label>
+        <div class="input-group">
+          <input
+            id="dateOfBirth"
+            class="form-control"
+            placeholder="yyyy-mm-dd"
+          />
+          <div class="input-group-append">
+            <button
+              class="btn btn-outline-secondary calendar"
+              type="button"
+            ></button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-outline-dark"
+      (click)="modal.close('Save click')"
+    >
+      Save
+    </button>
+  </div>
+</ng-template>
