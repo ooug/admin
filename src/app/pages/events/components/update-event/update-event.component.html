@@ -1,0 +1,101 @@
+<div>
+  <h2 mat-dialog-title>Update Event</h2>
+  <hr style="color: aliceblue" />
+
+  <mat-dialog-content>
+    <form [formGroup]="updateEventForm">
+      <table style="width: 100%">
+        <tr>
+          <td>
+            <mat-form-field color="accent">
+              <mat-label>Title</mat-label>
+              <input formControlName="title" matInput placeholder="Title" />
+              <!-- <mat-hint>Hint</mat-hint> -->
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field color="accent">
+              <mat-label>Short Description</mat-label>
+              <input
+                formControlName="shortDescription"
+                matInput
+                placeholder="Short Description"
+              />
+              <!-- <mat-hint>Hint</mat-hint> -->
+            </mat-form-field>
+          </td>
+        </tr>
+      </table>
+      <mat-form-field color="accent" style="width: 100%">
+        <mat-label>Long Description</mat-label>
+        <textarea
+          style="width: 100%"
+          formControlName="longDescription"
+          matInput
+          placeholder="Long Description"
+        ></textarea>
+        <!-- <mat-hint>Hint</mat-hint> -->
+      </mat-form-field>
+      <table style="width: 100%">
+        <tr>
+          <td>
+            <mat-form-field color="accent">
+              <mat-label>Date/Time</mat-label>
+              <input
+                type="datetime-local"
+                formControlName="dateTime"
+                matInput
+              />
+              <!-- <mat-hint>Hint</mat-hint> -->
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field color="accent">
+              <mat-label>Venue</mat-label>
+              <input
+                formControlName="venue"
+                matInput
+                placeholder="Event Venue"
+              />
+              <!-- <mat-hint>Hint</mat-hint> -->
+            </mat-form-field>
+          </td>
+        </tr>
+      </table>
+      <table>
+        <tr>
+          <td>
+            <mat-form-field color="accent" style="width: 100%">
+              <mat-label>Image URL Host</mat-label>
+              <input
+                formControlName="imageHost"
+                matInput
+                placeholder="URL Host"
+              />
+              <!-- <mat-hint>Hint</mat-hint> -->
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field color="accent" style="width: 100%">
+              <mat-label>Image URL Path</mat-label>
+              <input
+                formControlName="imagePath"
+                matInput
+                placeholder="URL Path"
+              />
+              <!-- <mat-hint>Hint</mat-hint> -->
+            </mat-form-field>
+          </td>
+        </tr>
+      </table>
+      <mat-slide-toggle color="accent" formControlName="enableRegistration"
+        >Enable Registration</mat-slide-toggle
+      >
+    </form>
+  </mat-dialog-content>
+</div>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="closeDialog()">Cancel</button>
+  <button (click)="updateEvent()" mat-raised-button color="accent">Save</button>
+</mat-dialog-actions>

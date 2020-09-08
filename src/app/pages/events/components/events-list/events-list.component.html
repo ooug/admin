@@ -1,0 +1,77 @@
+<mat-card>
+  <mat-card-title>Upcoming Events</mat-card-title>
+  <hr />
+  <mat-accordion style="margin-top: 15px">
+    <mat-expansion-panel
+      style="margin-top: 10px"
+      *ngFor="let event of upcomingEvents"
+    >
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{ event.title }}
+        </mat-panel-title>
+        <mat-panel-description>
+          On {{ event.Date.day }}-{{ event.Date.month }}-{{ event.Date.year }}
+          {{ event.time }} | Venue: {{ event.venue }}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <table style="width: 100%">
+        <tr>
+          <th>Image</th>
+          <td>
+            <img
+              src="{{ event.Image.host + event.Image.path }}"
+              style="width: 300px"
+              alt="EventImage"
+            />
+          </td>
+        </tr>
+        <tr>
+          <th>Enable Registration?</th>
+          <td>
+            {{ event.enableRegistration ? 'Enabled' : 'Not Enabled' }}
+            &nbsp;&nbsp;
+            <button
+              *ngIf="event.enableRegistration"
+              (click)="showRegistrations(event._id)"
+              mat-raised-button
+              color="accent"
+            >
+              Show Registration
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <th>Short Description</th>
+          <td>{{ event.shortDescription }}</td>
+        </tr>
+        <tr>
+          <th>Long Description</th>
+          <td>{{ event.longDescription }}</td>
+        </tr>
+        <tr>
+          <td>
+            <button
+              type="button"
+              (click)="updateEvent(event._id)"
+              mat-raised-button
+              color="accent"
+            >
+              Edit
+            </button>
+          </td>
+          <td>
+            <button
+              type="button"
+              (click)="deleteEvent(event._id)"
+              mat-raised-button
+              color="warn"
+            >
+              Delete
+            </button>
+          </td>
+        </tr>
+      </table>
+    </mat-expansion-panel>
+  </mat-accordion>
+</mat-card>
