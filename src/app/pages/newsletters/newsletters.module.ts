@@ -5,7 +5,7 @@ import {NewslettersRoutingModule} from './newsletters-routing.module';
 import {NewslettersComponent} from './newsletters.component';
 
 @NgModule({
-  declarations: [NewslettersComponent],
+  declarations: [],
   imports: [CommonModule, NewslettersRoutingModule],
 })
 export class NewslettersModule {}
