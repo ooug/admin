@@ -12,96 +12,158 @@ export class ActivityComponent implements OnInit {
 
   constructor(private modalService: NgbModal) {}
 
-  emailFormControl = new FormControl('', [
-    Validators.required,
-    Validators.email,
-  ]);
-
   updatedEvent = [
     {
       date: '17-10-2020',
       image: './assets/images/2.jpg',
       detail: 'when an unknown printer took when an unknown printer took',
-      eventOn: 'workshop',
+      type: 'workshop',
+      eventOn: 'web development',
+      organizedBy: '3rd year',
+      organizedAt: 'GIETU gunupur',
     },
     {
       date: '19-02-2020',
       image: './assets/images/1.jpg',
       detail: 'when an unknown printer took when an unknown printer took',
-      eventOn: 'workshop',
+      type: 'celebration',
+      eventOn: 'Android',
+      organizedBy: '3rd year',
+      organizedAt: 'GIETU gunupur',
     },
     {
       date: '17-10-2020',
       image: './assets/images/1.jpg',
       detail: 'when an unknown printer took when an unknown printer took',
-      eventOn: 'workshop',
+      type: 'workshop',
+      eventOn: 'web development',
+      organizedBy: '3rd year',
+      organizedAt: 'GIETU gunupur',
     },
     {
       date: '17-10-2020',
       image: './assets/images/2.jpg',
       detail: 'when an unknown printer took when an unknown printer took',
-      eventOn: 'workshop',
+      type: 'techbhukkads',
+      eventOn: 'web development',
+      organizedBy: '3rd year',
+      organizedAt: 'GIETU gunupur',
     },
     {
       date: '19-02-2020',
       image: './assets/images/1.jpg',
       detail: 'when an unknown printer took when an unknown printer took',
-      eventOn: 'workshop',
+      type: 'techbhukkads',
+      eventOn: 'photoshop',
+      organizedBy: '4th year',
+      organizedAt: 'GIETU gunupur',
     },
     {
       date: '17-10-2020',
       image: './assets/images/1.jpg',
       detail: 'when an unknown printer took when an unknown printer took',
-      eventOn: 'workshop',
+      type: 'workshop',
+      eventOn: 'web development',
+      organizedBy: '3rd year',
+      organizedAt: 'GIETU gunupur',
     },
   ];
   allEvents = [
     {
       date: '17-10-2020',
+      image: './assets/images/2.jpg',
+      detail: 'when an unknown printer took when an unknown printer took',
+      type: 'workshop',
+      eventOn: 'web development',
+      organizedBy: '3rd year',
+      organizedAt: 'GIETU gunupur',
+    },
+    {
+      date: '19-02-2020',
       image: './assets/images/1.jpg',
       detail: 'when an unknown printer took when an unknown printer took',
-      eventOn: 'workshop',
+      type: 'celebration',
+      eventOn: 'Android',
+      organizedBy: '3rd year',
+      organizedAt: 'GIETU gunupur',
     },
     {
       date: '17-10-2020',
       image: './assets/images/1.jpg',
       detail: 'when an unknown printer took when an unknown printer took',
-      eventOn: 'workshop',
+      type: 'workshop',
+      eventOn: 'web development',
+      organizedBy: '3rd year',
+      organizedAt: 'GIETU gunupur',
+    },
+    {
+      date: '17-10-2020',
+      image: './assets/images/2.jpg',
+      detail: 'when an unknown printer took when an unknown printer took',
+      type: 'techbhukkads',
+      eventOn: 'web development',
+      organizedBy: '3rd year',
+      organizedAt: 'GIETU gunupur',
+    },
+    {
+      date: '19-02-2020',
+      image: './assets/images/1.jpg',
+      detail: 'when an unknown printer took when an unknown printer took',
+      type: 'techbhukkads',
+      eventOn: 'photoshop',
+      organizedBy: '4th year',
+      organizedAt: 'GIETU gunupur',
     },
     {
       date: '17-10-2020',
       image: './assets/images/1.jpg',
       detail: 'when an unknown printer took when an unknown printer took',
-      eventOn: 'workshop',
+      type: 'workshop',
+      eventOn: 'web development',
+      organizedBy: '3rd year',
+      organizedAt: 'GIETU gunupur',
+    },
+    {
+      date: '17-10-2020',
+      image: './assets/images/2.jpg',
+      detail: 'when an unknown printer took when an unknown printer took',
+      type: 'workshop',
+      eventOn: 'web development',
+      organizedBy: '3rd year',
+      organizedAt: 'GIETU gunupur',
+    },
+    {
+      date: '19-02-2020',
+      image: './assets/images/1.jpg',
+      detail: 'when an unknown printer took when an unknown printer took',
+      type: 'celebration',
+      eventOn: 'Android',
+      organizedBy: '3rd year',
+      organizedAt: 'GIETU gunupur',
     },
     {
       date: '17-10-2020',
       image: './assets/images/1.jpg',
       detail: 'when an unknown printer took when an unknown printer took',
-      eventOn: 'workshop',
+      type: 'workshop',
+      eventOn: 'web development',
+      organizedBy: '3rd year',
+      organizedAt: 'GIETU gunupur',
     },
     {
       date: '17-10-2020',
-      image: './assets/images/1.jpg',
+      image: './assets/images/2.jpg',
       detail: 'when an unknown printer took when an unknown printer took',
-      eventOn: 'workshop',
-    },
-    {
-      date: '17-10-2020',
-      image: './assets/images/1.jpg',
-      detail: 'when an unknown printer took when an unknown printer took',
-      eventOn: 'workshop',
-    },
-    {
-      date: '17-10-2020',
-      image: './assets/images/1.jpg',
-      detail: 'when an unknown printer took when an unknown printer took',
-      eventOn: 'workshop',
+      type: 'techbhukkads',
+      eventOn: 'web development',
+      organizedBy: '3rd year',
+      organizedAt: 'GIETU gunupur',
     },
   ];
 
   // ---------image---------------
   url = '';
+
   onselect(e) {
     if (e.target.files) {
       const reader = new FileReader();
@@ -110,6 +172,20 @@ export class ActivityComponent implements OnInit {
         this.url = events.target.result;
       };
     }
+  }
+
+  onselectrecent(e) {
+    if (e.target.files) {
+      const reader = new FileReader();
+      reader.readAsDataURL(e.target.files[0]);
+      reader.onload = (events: any) => {
+        this.url = events.target.result;
+      };
+    }
+  }
+
+  refresh() {
+    this.url = '';
   }
 
   open(content) {
