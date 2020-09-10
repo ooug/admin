@@ -4,6 +4,6 @@ import {CommonModule} from '@angular/common';
 @NgModule({
   declarations: [],
 
-  imports: [CommonModule, NewslettersRoutingModule],
+  imports: [CommonModule],
 })
 export class NewslettersModule {}
