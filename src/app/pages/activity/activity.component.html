@@ -39,13 +39,13 @@
         aria-label="Close"
         (click)="refresh()"
         (click)="modal.dismiss('Cross click')"
-        (click)="refresh()"
       >
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
     <div class="modal-body" style="background-color: rgb(119, 133, 133)">
-      <form>
+      {{ activityDetail.value | json }}
+      <form [formGroup]="activityDetail" (ngSubmit)="addActivity()">
         <!---------------------image section---------------------->
         <div
           *ngIf="url === ''"
@@ -56,9 +56,18 @@
               src="assets/icons/file-upload-solid.svg"
               height="40%"
               width="40%"
-            /><br />
+            />
+            <br />
             <strong>There is no file selected!</strong>
             <p>Select an image...</p>
+            <small
+              [class.d-none]="
+                activityDetail.get('file').valid ||
+                activityDetail.get('file').untouched
+              "
+              class="text-danger"
+              >*Image is required!</small
+            >
           </label>
         </div>
         <div *ngIf="url !== ''">
@@ -66,7 +75,12 @@
         </div>
         <br />
         <hr />
-        <input type="file" id="file" (change)="onselect($event)" />
+        <input
+          formControlName="file"
+          type="file"
+          id="file"
+          (change)="onselect($event)"
+        />
         <div *ngIf="url !== ''" style="text-align: center; margin-top: -30px">
           <label for="file" class="upload-button">change Image</label>
         </div>
@@ -75,36 +89,109 @@
         <div class="row">
           <div class="col-md-6">
             <mat-form-field appearance="fill">
-              <mat-label>Choose an option</mat-label>
-              <select matNativeControl>
+              <mat-label>Event Type</mat-label>
+              <select formControlName="eventType" matNativeControl>
                 <option value=""></option>
                 <option value="workshop">workshop</option>
                 <option value="celebration">celebration</option>
                 <option value="mercedes">techbhukkads</option>
               </select>
             </mat-form-field>
+            <small
+              [class.d-none]="
+                activityDetail.get('eventType').valid ||
+                activityDetail.get('eventType').untouched
+              "
+              class="text-danger"
+              >*select a correct option</small
+            >
             <mat-form-field class="example-full-width">
-              <mat-label>Event On</mat-label>
-              <input matInput placeholder="Event On" />
+              <mat-label>Organized By</mat-label>
+              <input
+                formControlName="organizedBy"
+                matInput
+                placeholder="Organized By"
+              />
             </mat-form-field>
+            <small
+              [class.d-none]="
+                activityDetail.get('organizedBy').valid ||
+                activityDetail.get('organizedBy').untouched
+              "
+              class="text-danger"
+              >*who has organized the activity<br
+            /></small>
           </div>
           <div class="col-md-6">
             <mat-form-field class="example-full-width">
-              <mat-label>Organized By</mat-label>
-              <input matInput placeholder="Organized By" />
+              <mat-label>Event On</mat-label>
+              <input
+                formControlName="eventOn"
+                matInput
+                placeholder="Event On"
+              />
             </mat-form-field>
+            <small
+              [class.d-none]="
+                activityDetail.get('eventOn').valid ||
+                activityDetail.get('eventOn').untouched
+              "
+              class="text-danger"
+              >*this field is required</small
+            >
             <mat-form-field class="example-full-width">
               <mat-label>Organized At</mat-label>
-              <input matInput placeholder="Organized At" />
+              <input
+                formControlName="organizedAt"
+                matInput
+                placeholder="Organized At"
+              />
             </mat-form-field>
+            <small
+              [class.d-none]="
+                activityDetail.get('organizedAt').valid ||
+                activityDetail.get('organizedAt').untouched
+              "
+              class="text-danger"
+              >*where it was organized</small
+            >
+            <mat-form-field class="example-full-width">
+              <mat-label>date</mat-label>
+              <input
+                formControlName="date"
+                type="date"
+                matInput
+                placeholder="date"
+              />
+            </mat-form-field>
+            <small
+              [class.d-none]="
+                activityDetail.get('date').valid ||
+                activityDetail.get('date').untouched
+              "
+              class="text-danger"
+              >*Date is required!</small
+            >
           </div>
         </div>
 
         <mat-form-field class="example-full-width">
           <mat-label>Event Detail</mat-label>
-          <textarea matInput rows="5" placeholder="Event Detail"></textarea>
+          <textarea
+            formControlName="eventDetails"
+            matInput
+            rows="5"
+            placeholder="Event Detail"
+          ></textarea>
         </mat-form-field>
-
+        <small
+          [class.d-none]="
+            activityDetail.get('eventDetails').valid ||
+            activityDetail.get('eventDetails').untouched
+          "
+          class="text-danger"
+          >*write something about the activity<br
+        /></small>
         <input
           type="submit"
           value="Submit details"
@@ -115,7 +202,6 @@
   </ng-template>
   <br />
 </div>
-
 <div class="recent-activities">
   <h1><strong style="margin-left: 10px">Recent Activities</strong></h1>
   <div class="row">
@@ -125,7 +211,7 @@
           <div class="row">
             <div class="col-6" style="height: 110px">
               <img
-                src="{{ event.image }}"
+                src="{{ event.file }}"
                 alt="background"
                 height="100%"
                 width="100%"
@@ -164,10 +250,11 @@
           </button>
         </div>
         <div class="modal-body" style="background-color: rgb(119, 133, 133)">
-          <form>
+          {{ recentActivity.value | json }}
+          <form [formGroup]="recentActivity">
             <!---------------------image section---------------------->
             <div *ngIf="url === ''">
-              <img src="{{ event.image }}" height="200px" width="100%" />
+              <img src="{{ event.file }}" height="200px" width="100%" />
             </div>
             <div *ngIf="url !== ''">
               <img src="{{ url }}" height="200px" width="100%" />
@@ -188,19 +275,19 @@
                   <select matNativeControl>
                     <option
                       value="workshop"
-                      [selected]="event.type === 'workshop'"
+                      [selected]="event.eventType === 'workshop'"
                     >
                       workshop
                     </option>
                     <option
                       value="celebration"
-                      [selected]="event.type === 'celebration'"
+                      [selected]="event.eventType === 'celebration'"
                     >
                       celebration
                     </option>
                     <option
                       value="mercedes"
-                      [selected]="event.type === 'workshop'"
+                      [selected]="event.eventType === 'workshop'"
                     >
                       techbhukkads
                     </option>
@@ -209,8 +296,9 @@
                 <mat-form-field class="example-full-width">
                   <mat-label>Event On</mat-label>
                   <input
-                    matInput
                     value="{{ event.eventOn }}"
+                    formControlName="eventOn"
+                    matInput
                     placeholder="Event On"
                   />
                 </mat-form-field>
@@ -240,7 +328,7 @@
               <textarea
                 matInput
                 rows="5"
-                value="{{ event.detail }}"
+                value="{{ event.eventDetails }}"
                 placeholder="Event Detail"
               ></textarea>
             </mat-form-field>

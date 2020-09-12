@@ -7,6 +7,8 @@ import {from} from 'rxjs';
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
 
 const routes: Routes = [
   {
@@ -23,6 +25,9 @@ const routes: Routes = [
     MatInputModule,
     MatSelectModule,
     MatDatepickerModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
   ],
   exports: [RouterModule],
 })
