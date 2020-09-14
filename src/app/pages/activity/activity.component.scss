@@ -16,7 +16,7 @@
   text-align: center;
   border-radius: 25px;
   padding: 10px 30px;
-  background-color: #9c27b0;
+  background-color: #4834df;
   font-size: 18px;
   color: #fff;
 }
@@ -37,7 +37,7 @@
   text-align: center;
   border-radius: 21.5px;
   padding: 4px 16px;
-  background-color: #9c27b0;
+  background-color: #4834df;
   font-size: small;
   color: #fff;
 }
@@ -50,21 +50,24 @@
 .btn-submit {
   border-radius: 21.5px;
   padding: 4px 16px;
-  background-color: #9c27b0;
+  background-color: #4834df;
   font-size: small;
+}
+.form-submited {
+  background-color: yellow;
 }
 
 //---------------------------------------------------
 
 .box {
-  background-color: rgb(160, 153, 153);
+  background-color: darkgrey;
 }
 .cursor {
   cursor: pointer;
 }
 .modal-cross {
   border-radius: 50%;
-  background-color: #9c27b0;
+  background-color: #4834df;
   color: white;
   padding: 3px;
   padding-left: 8px;
@@ -82,7 +85,7 @@ input[type='file'] {
   top: 6px;
   left: 0;
   font-size: 15px;
-  color: rgb(153, 153, 153);
+  color: darkgrey;
 }
 
 .example-full-width {

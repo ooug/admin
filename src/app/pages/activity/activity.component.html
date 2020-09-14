@@ -6,7 +6,7 @@
       left: 93%;
       width: 60px;
       height: 60px;
-      background-color: #9c27b0;
+      background-color: #4834df;
       z-index: 2;
       border-radius: 50%;
     "
@@ -14,6 +14,7 @@
     <img src="assets/icons/plus-circle-solid.svg" height="100%" width="100%" />
   </div>
 </a>
+<h2 *ngIf="errorMsg">Server is not responding</h2>
 <div class="head">
   <h1 style="margin: 10px"><strong>Welcome to Activity Page</strong></h1>
   <div style="margin: 10px">
@@ -24,12 +25,16 @@
   <br />
   <br /><br />
   <div style="text-align: center">
-    <button (click)="open(upload)" class="btn btn-primary add-activity">
+    <button
+      (click)="open(upload)"
+      (click)="data_saved = false"
+      class="btn btn-primary add-activity"
+    >
       Add Activity
     </button>
   </div>
   <ng-template #upload let-modal>
-    <div class="modal-header" style="background-color: rgb(119, 133, 133)">
+    <div class="modal-header" style="background-color: darkgrey">
       <h5 class="modal-title" id="modal-basic-title">
         Insert Activity Details
       </h5>
@@ -43,7 +48,7 @@
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
-    <div class="modal-body" style="background-color: rgb(119, 133, 133)">
+    <div class="modal-body" style="background-color: darkgrey">
       {{ activityDetail.value | json }}
       <form [formGroup]="activityDetail" (ngSubmit)="addActivity()">
         <!---------------------image section---------------------->
@@ -75,12 +80,7 @@
         </div>
         <br />
         <hr />
-        <input
-          formControlName="file"
-          type="file"
-          id="file"
-          (change)="onselect($event)"
-        />
+        <input type="file" id="file" (change)="onselect($event)" />
         <div *ngIf="url !== ''" style="text-align: center; margin-top: -30px">
           <label for="file" class="upload-button">change Image</label>
         </div>
@@ -91,10 +91,10 @@
             <mat-form-field appearance="fill">
               <mat-label>Event Type</mat-label>
               <select formControlName="eventType" matNativeControl>
-                <option value=""></option>
-                <option value="workshop">workshop</option>
-                <option value="celebration">celebration</option>
-                <option value="mercedes">techbhukkads</option>
+                <option></option>
+                <option>workshop</option>
+                <option>celebration</option>
+                <option>techbhukkads</option>
               </select>
             </mat-form-field>
             <small
@@ -184,34 +184,46 @@
             placeholder="Event Detail"
           ></textarea>
         </mat-form-field>
-        <small
-          [class.d-none]="
-            activityDetail.get('eventDetails').valid ||
-            activityDetail.get('eventDetails').untouched
-          "
-          class="text-danger"
-          >*write something about the activity<br
-        /></small>
-        <input
-          type="submit"
-          value="Submit details"
-          class="btn btn-primary btn-submit"
-        />
+        <div *ngIf="data_saved === false">
+          <input
+            [class.d-none]="
+              activityDetail.get('file').invalid ||
+              activityDetail.get('eventType').invalid ||
+              activityDetail.get('organizedBy').invalid ||
+              activityDetail.get('eventOn').invalid ||
+              activityDetail.get('organizedAt').invalid ||
+              activityDetail.get('date').invalid
+            "
+            type="submit"
+            value="Submit details"
+            class="btn btn-primary btn-submit"
+            [disabled]="!activityDetail.valid"
+          />
+        </div>
+        <div *ngIf="data_saved === true">
+          your data is saved successfully and it will be reflected after some
+          time
+        </div>
       </form>
     </div>
   </ng-template>
   <br />
 </div>
+
 <div class="recent-activities">
   <h1><strong style="margin-left: 10px">Recent Activities</strong></h1>
   <div class="row">
     <div class="col-lg-4 col-md-4" *ngFor="let event of updatedEvent">
-      <a (click)="open(recent)">
+      <a
+        (click)="open(recent)"
+        (click)="data_saved = false"
+        (click)="recentactivity(event)"
+      >
         <div class="card shadow rounded">
           <div class="row">
             <div class="col-6" style="height: 110px">
               <img
-                src="{{ event.file }}"
+                src="{{ event.eventImage }}"
                 alt="background"
                 height="100%"
                 width="100%"
@@ -227,18 +239,16 @@
                 padding-right: 15px;
               "
             >
-              {{ event.date }}<br />
-              {{ event.eventOn }}
+              {{ event.eventDate }}<br />
+              {{ event.eventOn }}<br />
               {{ event.organizedAt }}
             </div>
           </div>
         </div>
       </a>
       <ng-template #recent let-modal>
-        <div class="modal-header" style="background-color: rgb(119, 133, 133)">
-          <h5 class="modal-title" id="modal-basic-title">
-            Insert Activity Details
-          </h5>
+        <div class="modal-header" style="background-color: darkgrey">
+          <h5 class="modal-title" id="modal-basic-title">Activity Details</h5>
           <button
             type="button"
             class="modal-cross"
@@ -249,19 +259,18 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="modal-body" style="background-color: rgb(119, 133, 133)">
-          {{ recentActivity.value | json }}
+        <div class="modal-body" style="background-color: darkgrey">
           <form [formGroup]="recentActivity">
             <!---------------------image section---------------------->
             <div *ngIf="url === ''">
-              <img src="{{ event.file }}" height="200px" width="100%" />
+              <img src="{{ event.eventImage }}" height="200px" width="100%" />
             </div>
             <div *ngIf="url !== ''">
               <img src="{{ url }}" height="200px" width="100%" />
             </div>
             <br />
             <hr />
-            <input type="file" id="file" (change)="onselect($event)" />
+            <input type="file" id="file" (change)="onselectrecent($event)" />
             <div style="text-align: center; margin-top: -35px">
               <label for="file" class="upload-button">change Image</label>
             </div>
@@ -272,7 +281,7 @@
               <div class="col-md-6">
                 <mat-form-field appearance="fill">
                   <mat-label>Choose an option</mat-label>
-                  <select matNativeControl>
+                  <select matNativeControl formControlName="eventType">
                     <option
                       value="workshop"
                       [selected]="event.eventType === 'workshop'"
@@ -286,8 +295,8 @@
                       celebration
                     </option>
                     <option
-                      value="mercedes"
-                      [selected]="event.eventType === 'workshop'"
+                      value="techbhukkads"
+                      [selected]="event.eventType === 'techbhukkads'"
                     >
                       techbhukkads
                     </option>
@@ -296,7 +305,6 @@
                 <mat-form-field class="example-full-width">
                   <mat-label>Event On</mat-label>
                   <input
-                    value="{{ event.eventOn }}"
                     formControlName="eventOn"
                     matInput
                     placeholder="Event On"
@@ -308,7 +316,7 @@
                   <mat-label>Organized By</mat-label>
                   <input
                     matInput
-                    value="{{ event.organizedBy }}"
+                    formControlName="organizedBy"
                     placeholder="Organized By"
                   />
                 </mat-form-field>
@@ -316,7 +324,7 @@
                   <mat-label>Organized At</mat-label>
                   <input
                     matInput
-                    value="organizedAt"
+                    formControlName="organizedAt"
                     placeholder="Organized At"
                   />
                 </mat-form-field>
@@ -328,21 +336,28 @@
               <textarea
                 matInput
                 rows="5"
-                value="{{ event.eventDetails }}"
+                formControlName="eventDetails"
                 placeholder="Event Detail"
               ></textarea>
             </mat-form-field>
-
-            <input
-              type="submit"
-              value="Delete"
-              class="btn btn-danger btn-submit-delete"
-            />
-            <input
-              type="submit"
-              value="Update"
-              class="btn btn-primary btn-submit"
-            />
+            <div *ngIf="data_saved === false">
+              <input
+                type="submit"
+                value="Delete"
+                class="btn btn-danger btn-submit-delete"
+                (click)="deleteActivity(event._id)"
+              />
+              <input
+                type="submit"
+                value="Update"
+                class="btn btn-primary btn-submit"
+                (click)="updateActivity()"
+              />
+            </div>
+            <div *ngIf="data_saved === true">
+              your data is saved successfully and it will be reflected after
+              some time
+            </div>
           </form>
         </div>
       </ng-template>
@@ -353,17 +368,19 @@
 <div class="all-activities">
   <div class="row">
     <div class="col-9">
-      <h1><strong style="margin-left: 10px"> All Activities </strong></h1>
+      <h1><strong style="margin-left: 10px">Activities </strong></h1>
     </div>
-    <div class="col-1">by type</div>
-    <div class="col-2">sort by</div>
   </div>
   <div class="row">
     <div class="col-lg-4 col-md-4" *ngFor="let event of allEvents">
-      <a (click)="open(allevent)">
+      <a
+        (click)="open(allevent)"
+        (click)="data_saved = false"
+        (click)="recentactivity(event)"
+      >
         <div class="card shadow rounded">
           <img
-            src="{{ event.image }}"
+            src="{{ event.eventImage }}"
             alt="background"
             height="200px"
             width="100%"
@@ -375,10 +392,8 @@
         </div>
       </a>
       <ng-template #allevent let-modal>
-        <div class="modal-header" style="background-color: rgb(119, 133, 133)">
-          <h5 class="modal-title" id="modal-basic-title">
-            Insert Activity Details
-          </h5>
+        <div class="modal-header" style="background-color: darkgrey">
+          <h5 class="modal-title" id="modal-basic-title">Activity Details</h5>
           <button
             type="button"
             class="modal-cross"
@@ -389,18 +404,18 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="modal-body" style="background-color: rgb(119, 133, 133)">
-          <form>
+        <div class="modal-body" style="background-color: darkgrey">
+          <form [formGroup]="recentActivity">
             <!---------------------image section---------------------->
             <div *ngIf="url === ''">
-              <img src="{{ event.image }}" height="200px" width="100%" />
+              <img src="{{ event.eventImage }}" height="200px" width="100%" />
             </div>
             <div *ngIf="url !== ''">
               <img src="{{ url }}" height="200px" width="100%" />
             </div>
             <br />
             <hr />
-            <input type="file" id="file" (change)="onselect($event)" />
+            <input type="file" id="file" (change)="onselectrecent($event)" />
             <div style="text-align: center; margin-top: -35px">
               <label for="file" class="upload-button">change Image</label>
             </div>
@@ -411,22 +426,22 @@
               <div class="col-md-6">
                 <mat-form-field appearance="fill">
                   <mat-label>Choose an option</mat-label>
-                  <select matNativeControl>
+                  <select matNativeControl formControlName="eventType">
                     <option
                       value="workshop"
-                      [selected]="event.type === 'workshop'"
+                      [selected]="event.eventType === 'workshop'"
                     >
                       workshop
                     </option>
                     <option
                       value="celebration"
-                      [selected]="event.type === 'celebration'"
+                      [selected]="event.eventType === 'celebration'"
                     >
                       celebration
                     </option>
                     <option
-                      value="mercedes"
-                      [selected]="event.type === 'workshop'"
+                      value="techbhukkads"
+                      [selected]="event.eventType === 'techbhukkads'"
                     >
                       techbhukkads
                     </option>
@@ -435,8 +450,8 @@
                 <mat-form-field class="example-full-width">
                   <mat-label>Event On</mat-label>
                   <input
+                    formControlName="eventOn"
                     matInput
-                    value="{{ event.eventOn }}"
                     placeholder="Event On"
                   />
                 </mat-form-field>
@@ -446,7 +461,7 @@
                   <mat-label>Organized By</mat-label>
                   <input
                     matInput
-                    value="{{ event.organizedBy }}"
+                    formControlName="organizedBy"
                     placeholder="Organized By"
                   />
                 </mat-form-field>
@@ -454,7 +469,7 @@
                   <mat-label>Organized At</mat-label>
                   <input
                     matInput
-                    value="organizedAt"
+                    formControlName="organizedAt"
                     placeholder="Organized At"
                   />
                 </mat-form-field>
@@ -466,21 +481,28 @@
               <textarea
                 matInput
                 rows="5"
-                value="{{ event.detail }}"
+                formControlName="eventDetails"
                 placeholder="Event Detail"
               ></textarea>
             </mat-form-field>
-
-            <input
-              type="submit"
-              value="Delete"
-              class="btn btn-danger btn-submit-delete"
-            />
-            <input
-              type="submit"
-              value="Update"
-              class="btn btn-primary btn-submit"
-            />
+            <div *ngIf="data_saved === false">
+              <input
+                type="submit"
+                value="Delete"
+                class="btn btn-danger btn-submit-delete"
+                (click)="deleteActivity(event._id)"
+              />
+              <input
+                type="submit"
+                value="Update"
+                class="btn btn-primary btn-submit"
+                (click)="updateActivity()"
+              />
+            </div>
+            <div *ngIf="data_saved === true">
+              your data is saved successfully and it will be reflected after
+              some time
+            </div>
           </form>
         </div>
       </ng-template>
