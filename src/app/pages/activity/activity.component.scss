@@ -1,11 +1,35 @@
+//---------------upcoming events-----------------
+.add-upcoming {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  text-align: center;
+  border-radius: 15px;
+  padding: 1.5px 8px;
+  background-color: #4834df;
+  color: #fff;
+}
+.box-upcoming {
+  background-color: darkgrey;
+  margin: 0;
+  padding: 0;
+  border-left: 2px solid #b83227;
+}
+
+//--------------------------------------------------
 .recent-activities {
-  margin-top: 5rem;
-  border: 1px solid #dadada;
-  padding: 3%;
+  margin-top: 5px;
+  border-left: 2px solid #b83227;
+  border-bottom: 2px solid #b83227;
+  padding-top: 5px;
+  background-color: darkgrey;
 }
 
 .all-activities {
   margin-top: 2rem;
+  padding-top: 5px;
+  border-left: 2px solid #b83227;
+  border-top: 2px solid #b83227;
+  background-color: darkgrey;
 }
 
 .card {
@@ -19,6 +43,7 @@
   background-color: #4834df;
   font-size: 18px;
   color: #fff;
+  border: 1.5px solid #b83227;
 }
 
 //------------modal-----------------
@@ -91,3 +116,31 @@ input[type='file'] {
 .example-full-width {
   width: 100%;
 }
+//----------------------virtual scrolling-------------
+.viewport {
+  height: 200px;
+  width: 100%;
+}
+.viewport-act {
+  height: 500px;
+}
+
+.item-detail {
+  height: 50px;
+  width: 100%;
+  padding-top: 1px;
+  overflow: hidden;
+}
+
+cdk-virtual-scroll-viewport::-webkit-scrollbar {
+  width: 2px;
+}
+cdk-virtual-scroll-viewport::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+cdk-virtual-scroll-viewport::-webkit-scrollbar-thumb {
+  width: 0;
+  background-color: #b83227;
+}
+
+//------------------------------------------------

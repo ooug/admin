@@ -18,26 +18,269 @@
 <div class="head">
   <h1 style="margin: 10px"><strong>Welcome to Activity Page</strong></h1>
   <div style="margin: 10px">
-    Lorem Ipsum has been the industry's standard dummy text ever since the
-    1500s, when an unknown printer took a galley of type and scrambled it to
-    make a type specimen book.
+    In the activity panel, you will be able to insert/modify all activities.
+    Till now there are {{ allEvents.length }} activities.
   </div>
-  <br />
-  <br /><br />
-  <div style="text-align: center">
-    <button
-      (click)="open(upload)"
-      (click)="data_saved = false"
-      class="btn btn-primary add-activity"
-    >
-      Add Activity
-    </button>
+
+  <div class="row">
+    <div class="col-md-8">
+      <br /><br /><br />
+      <div style="text-align: center">
+        <button
+          (click)="open(upload)"
+          (click)="data_saved = false"
+          class="btn btn-primary add-activity"
+        >
+          Add Activity
+        </button>
+        <br /><br /><br /><br />
+      </div>
+    </div>
+    <div class="col-md-4 box-upcoming">
+      <div class="row" style="margin: 0; padding: 0">
+        <div
+          class="col-9"
+          style="
+            padding-left: 4px;
+            color: #b83227;
+            margin-top: 10px;
+            margin-bottom: 10px;
+          "
+        >
+          <b>Upcoming Events</b>
+        </div>
+        <div class="col-3">
+          <button
+            (click)="open(upcoming)"
+            (click)="data_saved = false"
+            class="btn add-upcoming"
+          >
+            Add
+          </button>
+          <ng-template #upcoming let-modal>
+            <div
+              class="modal-header"
+              style="background-color: rgb(204, 177, 177)"
+            >
+              <b class="modal-title" id="modal-basic-title"> Insert Details </b>
+              <button
+                type="button"
+                class="modal-cross"
+                aria-label="Close"
+                (click)="refresh()"
+                (click)="modal.dismiss('Cross click')"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body" style="background-color: darkgrey">
+              <div *ngIf="data_saved === false">
+                <form
+                  [formGroup]="upcomingEventDetail"
+                  (ngSubmit)="addUpcomingActivity()"
+                >
+                  <!---------------------image section---------------------->
+                  <div
+                    *ngIf="url === ''"
+                    style="height: 200px; text-align: center; padding-top: 10%"
+                  >
+                    <label for="file" style="color: white">
+                      <img
+                        src="assets/icons/file-upload-solid.svg"
+                        height="40%"
+                        width="40%"
+                      />
+                      <br />
+                      <strong>There is no file selected!</strong>
+                      <p>Select an image...</p>
+                      <small
+                        [class.d-none]="
+                          upcomingEventDetail.get('file').valid ||
+                          upcomingEventDetail.get('file').untouched
+                        "
+                        class="text-danger"
+                        >*Image is required!</small
+                      >
+                    </label>
+                  </div>
+                  <div *ngIf="url !== ''">
+                    <img src="{{ url }}" height="200px" width="100%" />
+                  </div>
+                  <br />
+                  <hr />
+                  <input
+                    type="file"
+                    id="file"
+                    (change)="onselectupcoming($event)"
+                  />
+                  <div
+                    *ngIf="url !== ''"
+                    style="text-align: center; margin-top: -30px"
+                  >
+                    <label for="file" class="upload-button">change Image</label>
+                  </div>
+                  <!----------------------------------------------->
+
+                  <mat-form-field class="example-full-width">
+                    <mat-label>Url</mat-label>
+                    <input
+                      formControlName="url"
+                      matInput
+                      placeholder="Enter Url"
+                    />
+                  </mat-form-field>
+                  <small
+                    [class.d-none]="
+                      upcomingEventDetail.get('url').valid ||
+                      upcomingEventDetail.get('url').untouched
+                    "
+                    class="text-danger"
+                    >*this field is required<br
+                  /></small>
+
+                  <input
+                    [class.d-none]="
+                      upcomingEventDetail.get('file').invalid ||
+                      upcomingEventDetail.get('url').invalid
+                    "
+                    type="submit"
+                    value="Submit details"
+                    class="btn btn-primary btn-submit"
+                  />
+                </form>
+              </div>
+              <div
+                *ngIf="data_saved === true"
+                style="text-align: center; color: white"
+              >
+                your data is saved successfully and it will be reflected after
+                some time
+              </div>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+
+      <cdk-virtual-scroll-viewport [itemSize]="50" class="viewport">
+        <div *cdkVirtualFor="let event of upcomingEvents">
+          <a
+            (click)="upcomingActivityValue(event)"
+            (click)="open(updateUpcoming)"
+          >
+            <div class="item-detail">
+              <div class="row">
+                <div class="col-5" style="margin: 0; padding: 0">
+                  <img src="{{ event.imageName }}" height="100%" width="100%" />
+                </div>
+                <div
+                  class="col-7"
+                  style="
+                    background-color: rgb(219, 197, 248);
+                    margin: 0;
+                    padding: 13px;
+                  "
+                >
+                  {{ event.url }}
+                </div>
+              </div>
+            </div>
+          </a>
+          <ng-template #updateUpcoming let-modal>
+            <div
+              class="modal-header"
+              style="background-color: rgb(204, 177, 177)"
+            >
+              <b class="modal-title" id="modal-basic-title"> Update Details </b>
+              <button
+                type="button"
+                class="modal-cross"
+                aria-label="Close"
+                (click)="refresh()"
+                (click)="modal.dismiss('Cross click')"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body" style="background-color: darkgrey">
+              <div *ngIf="data_saved === false">
+                <form [formGroup]="upcomingEventDetail">
+                  <!---------------------image section---------------------->
+                  <div *ngIf="url === ''">
+                    <img
+                      src="{{ event.imageName }}"
+                      height="200px"
+                      width="100%"
+                    />
+                  </div>
+                  <div *ngIf="url !== ''">
+                    <img src="{{ url }}" height="200px" width="100%" />
+                  </div>
+                  <br />
+                  <hr />
+                  <input
+                    type="file"
+                    id="file"
+                    (change)="onselectupcoming($event)"
+                  />
+                  <div style="text-align: center; margin-top: -35px">
+                    <label for="file" class="upload-button">change Image</label>
+                  </div>
+                  <br />
+                  <!----------------------------------------------->
+
+                  <mat-form-field class="example-full-width">
+                    <mat-label>Url</mat-label>
+                    <input
+                      formControlName="url"
+                      matInput
+                      placeholder="Enter Url"
+                    />
+                  </mat-form-field>
+                  <small
+                    [class.d-none]="
+                      upcomingEventDetail.get('url').valid ||
+                      upcomingEventDetail.get('url').untouched
+                    "
+                    class="text-danger"
+                    >*this field is required<br
+                  /></small>
+
+                  <input
+                    type="submit"
+                    value="Delete"
+                    class="btn btn-danger btn-submit-delete"
+                    (click)="deleteUpcoming(event._id)"
+                  />
+                  <input
+                    [class.d-none]="
+                      upcomingEventDetail.get('file').invalid ||
+                      upcomingEventDetail.get('url').invalid
+                    "
+                    type="submit"
+                    value="Update"
+                    class="btn btn-primary btn-submit"
+                    (click)="updateUpcomingActivity()"
+                  />
+                </form>
+              </div>
+              <div
+                *ngIf="data_saved === true"
+                style="text-align: center; color: white"
+              >
+                your data is saved successfully and it will be reflected after
+                sometime
+              </div>
+            </div>
+          </ng-template>
+        </div>
+      </cdk-virtual-scroll-viewport>
+    </div>
   </div>
   <ng-template #upload let-modal>
     <div class="modal-header" style="background-color: darkgrey">
-      <h5 class="modal-title" id="modal-basic-title">
+      <b class="modal-title" id="modal-basic-title">
         Insert Activity Details
-      </h5>
+      </b>
       <button
         type="button"
         class="modal-cross"
@@ -49,142 +292,142 @@
       </button>
     </div>
     <div class="modal-body" style="background-color: darkgrey">
-      {{ activityDetail.value | json }}
-      <form [formGroup]="activityDetail" (ngSubmit)="addActivity()">
-        <!---------------------image section---------------------->
-        <div
-          *ngIf="url === ''"
-          style="height: 200px; text-align: center; padding-top: 10%"
-        >
-          <label for="file" style="color: white">
-            <img
-              src="assets/icons/file-upload-solid.svg"
-              height="40%"
-              width="40%"
-            />
-            <br />
-            <strong>There is no file selected!</strong>
-            <p>Select an image...</p>
-            <small
-              [class.d-none]="
-                activityDetail.get('file').valid ||
-                activityDetail.get('file').untouched
-              "
-              class="text-danger"
-              >*Image is required!</small
-            >
-          </label>
-        </div>
-        <div *ngIf="url !== ''">
-          <img src="{{ url }}" height="200px" width="100%" />
-        </div>
-        <br />
-        <hr />
-        <input type="file" id="file" (change)="onselect($event)" />
-        <div *ngIf="url !== ''" style="text-align: center; margin-top: -30px">
-          <label for="file" class="upload-button">change Image</label>
-        </div>
-        <!----------------------------------------------->
-
-        <div class="row">
-          <div class="col-md-6">
-            <mat-form-field appearance="fill">
-              <mat-label>Event Type</mat-label>
-              <select formControlName="eventType" matNativeControl>
-                <option></option>
-                <option>workshop</option>
-                <option>celebration</option>
-                <option>techbhukkads</option>
-              </select>
-            </mat-form-field>
-            <small
-              [class.d-none]="
-                activityDetail.get('eventType').valid ||
-                activityDetail.get('eventType').untouched
-              "
-              class="text-danger"
-              >*select a correct option</small
-            >
-            <mat-form-field class="example-full-width">
-              <mat-label>Organized By</mat-label>
-              <input
-                formControlName="organizedBy"
-                matInput
-                placeholder="Organized By"
+      <div *ngIf="data_saved === false">
+        <form [formGroup]="activityDetail" (ngSubmit)="addActivity()">
+          <!---------------------image section---------------------->
+          <div
+            *ngIf="url === ''"
+            style="height: 200px; text-align: center; padding-top: 10%"
+          >
+            <label for="file" style="color: white">
+              <img
+                src="assets/icons/file-upload-solid.svg"
+                height="40%"
+                width="40%"
               />
-            </mat-form-field>
-            <small
-              [class.d-none]="
-                activityDetail.get('organizedBy').valid ||
-                activityDetail.get('organizedBy').untouched
-              "
-              class="text-danger"
-              >*who has organized the activity<br
-            /></small>
+              <br />
+              <strong>There is no file selected!</strong>
+              <p>Select an image...</p>
+              <small
+                [class.d-none]="
+                  activityDetail.get('file').valid ||
+                  activityDetail.get('file').untouched
+                "
+                class="text-danger"
+                >*Image is required!</small
+              >
+            </label>
           </div>
-          <div class="col-md-6">
-            <mat-form-field class="example-full-width">
-              <mat-label>Event On</mat-label>
-              <input
-                formControlName="eventOn"
-                matInput
-                placeholder="Event On"
-              />
-            </mat-form-field>
-            <small
-              [class.d-none]="
-                activityDetail.get('eventOn').valid ||
-                activityDetail.get('eventOn').untouched
-              "
-              class="text-danger"
-              >*this field is required</small
-            >
-            <mat-form-field class="example-full-width">
-              <mat-label>Organized At</mat-label>
-              <input
-                formControlName="organizedAt"
-                matInput
-                placeholder="Organized At"
-              />
-            </mat-form-field>
-            <small
-              [class.d-none]="
-                activityDetail.get('organizedAt').valid ||
-                activityDetail.get('organizedAt').untouched
-              "
-              class="text-danger"
-              >*where it was organized</small
-            >
-            <mat-form-field class="example-full-width">
-              <mat-label>date</mat-label>
-              <input
-                formControlName="date"
-                type="date"
-                matInput
-                placeholder="date"
-              />
-            </mat-form-field>
-            <small
-              [class.d-none]="
-                activityDetail.get('date').valid ||
-                activityDetail.get('date').untouched
-              "
-              class="text-danger"
-              >*Date is required!</small
-            >
+          <div *ngIf="url !== ''">
+            <img src="{{ url }}" height="200px" width="100%" />
           </div>
-        </div>
+          <br />
+          <hr />
+          <input type="file" id="file" (change)="onselect($event)" />
+          <div *ngIf="url !== ''" style="text-align: center; margin-top: -30px">
+            <label for="file" class="upload-button">change Image</label>
+          </div>
+          <!----------------------------------------------->
 
-        <mat-form-field class="example-full-width">
-          <mat-label>Event Detail</mat-label>
-          <textarea
-            formControlName="eventDetails"
-            matInput
-            rows="5"
-            placeholder="Event Detail"
-          ></textarea>
-        </mat-form-field>
-        <div *ngIf="data_saved === false">
+          <div class="row">
+            <div class="col-md-6">
+              <mat-form-field appearance="fill">
+                <mat-label>Event Type</mat-label>
+                <select formControlName="eventType" matNativeControl>
+                  <option></option>
+                  <option>workshop</option>
+                  <option>celebration</option>
+                  <option>techbhukkads</option>
+                </select>
+              </mat-form-field>
+              <small
+                [class.d-none]="
+                  activityDetail.get('eventType').valid ||
+                  activityDetail.get('eventType').untouched
+                "
+                class="text-danger"
+                >*select a correct option</small
+              >
+              <mat-form-field class="example-full-width">
+                <mat-label>Organized By</mat-label>
+                <input
+                  formControlName="organizedBy"
+                  matInput
+                  placeholder="Organized By"
+                />
+              </mat-form-field>
+              <small
+                [class.d-none]="
+                  activityDetail.get('organizedBy').valid ||
+                  activityDetail.get('organizedBy').untouched
+                "
+                class="text-danger"
+                >*who has organized the activity<br
+              /></small>
+            </div>
+            <div class="col-md-6">
+              <mat-form-field class="example-full-width">
+                <mat-label>Event On</mat-label>
+                <input
+                  formControlName="eventOn"
+                  matInput
+                  placeholder="Event On"
+                />
+              </mat-form-field>
+              <small
+                [class.d-none]="
+                  activityDetail.get('eventOn').valid ||
+                  activityDetail.get('eventOn').untouched
+                "
+                class="text-danger"
+                >*this field is required</small
+              >
+              <mat-form-field class="example-full-width">
+                <mat-label>Organized At</mat-label>
+                <input
+                  formControlName="organizedAt"
+                  matInput
+                  placeholder="Organized At"
+                />
+              </mat-form-field>
+              <small
+                [class.d-none]="
+                  activityDetail.get('organizedAt').valid ||
+                  activityDetail.get('organizedAt').untouched
+                "
+                class="text-danger"
+                >*where it was organized</small
+              >
+              <mat-form-field class="example-full-width">
+                <mat-label>date</mat-label>
+                <input
+                  formControlName="date"
+                  type="date"
+                  matInput
+                  placeholder="date"
+                />
+              </mat-form-field>
+              <small
+                [class.d-none]="
+                  activityDetail.get('date').valid ||
+                  activityDetail.get('date').untouched
+                "
+                class="text-danger"
+                >*Date is required!</small
+              >
+            </div>
+          </div>
+
+          <mat-form-field class="example-full-width">
+            <mat-label>Event Detail</mat-label>
+            <textarea
+              formControlName="eventDetails"
+              matInput
+              rows="5"
+              placeholder="Event Detail"
+            ></textarea>
+          </mat-form-field>
+
           <input
             [class.d-none]="
               activityDetail.get('file').invalid ||
@@ -199,21 +442,29 @@
             class="btn btn-primary btn-submit"
             [disabled]="!activityDetail.valid"
           />
-        </div>
-        <div *ngIf="data_saved === true">
-          your data is saved successfully and it will be reflected after some
-          time
-        </div>
-      </form>
+        </form>
+      </div>
+      <div *ngIf="data_saved === true" style="text-align: center; color: white">
+        your data is saved successfully and it will be reflected after some time
+      </div>
     </div>
   </ng-template>
-  <br />
 </div>
 
 <div class="recent-activities">
-  <h1><strong style="margin-left: 10px">Recent Activities</strong></h1>
+  <h2
+    style="
+      margin-left: 10px;
+      margin-top: 10px;
+      margin-bottom: 0px;
+      color: #b83227;
+    "
+  >
+    <strong>Recent Activities</strong>
+  </h2>
+  <hr style="margin-top: -4px" />
   <div class="row">
-    <div class="col-lg-4 col-md-4" *ngFor="let event of updatedEvent">
+    <div class="col-md-4 col-6" *ngFor="let event of updatedEvent">
       <a
         (click)="open(recent)"
         (click)="data_saved = false"
@@ -239,9 +490,9 @@
                 padding-right: 15px;
               "
             >
-              {{ event.eventDate }}<br />
-              {{ event.eventOn }}<br />
-              {{ event.organizedAt }}
+              <b>Event On:</b> {{ event.eventOn }}<br />
+              <b>date:</b> {{ event.eventDate }}<br />
+              <b>venue:</b> {{ event.organizedAt }}
             </div>
           </div>
         </div>
@@ -260,87 +511,88 @@
           </button>
         </div>
         <div class="modal-body" style="background-color: darkgrey">
-          <form [formGroup]="recentActivity">
-            <!---------------------image section---------------------->
-            <div *ngIf="url === ''">
-              <img src="{{ event.eventImage }}" height="200px" width="100%" />
-            </div>
-            <div *ngIf="url !== ''">
-              <img src="{{ url }}" height="200px" width="100%" />
-            </div>
-            <br />
-            <hr />
-            <input type="file" id="file" (change)="onselectrecent($event)" />
-            <div style="text-align: center; margin-top: -35px">
-              <label for="file" class="upload-button">change Image</label>
-            </div>
-            <br />
-            <!----------------------------------------------->
-
-            <div class="row">
-              <div class="col-md-6">
-                <mat-form-field appearance="fill">
-                  <mat-label>Choose an option</mat-label>
-                  <select matNativeControl formControlName="eventType">
-                    <option
-                      value="workshop"
-                      [selected]="event.eventType === 'workshop'"
-                    >
-                      workshop
-                    </option>
-                    <option
-                      value="celebration"
-                      [selected]="event.eventType === 'celebration'"
-                    >
-                      celebration
-                    </option>
-                    <option
-                      value="techbhukkads"
-                      [selected]="event.eventType === 'techbhukkads'"
-                    >
-                      techbhukkads
-                    </option>
-                  </select>
-                </mat-form-field>
-                <mat-form-field class="example-full-width">
-                  <mat-label>Event On</mat-label>
-                  <input
-                    formControlName="eventOn"
-                    matInput
-                    placeholder="Event On"
-                  />
-                </mat-form-field>
+          <div *ngIf="data_saved === false">
+            <form [formGroup]="recentActivity">
+              <!---------------------image section---------------------->
+              <div *ngIf="url === ''">
+                <img src="{{ event.eventImage }}" height="200px" width="100%" />
               </div>
-              <div class="col-md-6">
-                <mat-form-field class="example-full-width">
-                  <mat-label>Organized By</mat-label>
-                  <input
-                    matInput
-                    formControlName="organizedBy"
-                    placeholder="Organized By"
-                  />
-                </mat-form-field>
-                <mat-form-field class="example-full-width">
-                  <mat-label>Organized At</mat-label>
-                  <input
-                    matInput
-                    formControlName="organizedAt"
-                    placeholder="Organized At"
-                  />
-                </mat-form-field>
+              <div *ngIf="url !== ''">
+                <img src="{{ url }}" height="200px" width="100%" />
               </div>
-            </div>
+              <br />
+              <hr />
+              <input type="file" id="file" (change)="onselectrecent($event)" />
+              <div style="text-align: center; margin-top: -35px">
+                <label for="file" class="upload-button">change Image</label>
+              </div>
+              <br />
+              <!----------------------------------------------->
 
-            <mat-form-field class="example-full-width">
-              <mat-label>Event Detail</mat-label>
-              <textarea
-                matInput
-                rows="5"
-                formControlName="eventDetails"
-                placeholder="Event Detail"
-              ></textarea>
-            </mat-form-field>
-            <div *ngIf="data_saved === false">
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-form-field appearance="fill">
+                    <mat-label>Choose an option</mat-label>
+                    <select matNativeControl formControlName="eventType">
+                      <option
+                        value="workshop"
+                        [selected]="event.eventType === 'workshop'"
+                      >
+                        workshop
+                      </option>
+                      <option
+                        value="celebration"
+                        [selected]="event.eventType === 'celebration'"
+                      >
+                        celebration
+                      </option>
+                      <option
+                        value="techbhukkads"
+                        [selected]="event.eventType === 'techbhukkads'"
+                      >
+                        techbhukkads
+                      </option>
+                    </select>
+                  </mat-form-field>
+                  <mat-form-field class="example-full-width">
+                    <mat-label>Event On</mat-label>
+                    <input
+                      formControlName="eventOn"
+                      matInput
+                      placeholder="Event On"
+                    />
+                  </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <mat-label>Organized By</mat-label>
+                    <input
+                      matInput
+                      formControlName="organizedBy"
+                      placeholder="Organized By"
+                    />
+                  </mat-form-field>
+                  <mat-form-field class="example-full-width">
+                    <mat-label>Organized At</mat-label>
+                    <input
+                      matInput
+                      formControlName="organizedAt"
+                      placeholder="Organized At"
+                    />
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <mat-form-field class="example-full-width">
+                <mat-label>Event Detail</mat-label>
+                <textarea
+                  matInput
+                  rows="5"
+                  formControlName="eventDetails"
+                  placeholder="Event Detail"
+                ></textarea>
+              </mat-form-field>
+
               <input
                 type="submit"
                 value="Delete"
@@ -348,17 +600,28 @@
                 (click)="deleteActivity(event._id)"
               />
               <input
+                [class.d-none]="
+                  recentActivity.get('file').invalid ||
+                  recentActivity.get('eventType').invalid ||
+                  recentActivity.get('organizedBy').invalid ||
+                  recentActivity.get('eventOn').invalid ||
+                  recentActivity.get('organizedAt').invalid ||
+                  recentActivity.get('date').invalid
+                "
                 type="submit"
                 value="Update"
                 class="btn btn-primary btn-submit"
                 (click)="updateActivity()"
               />
-            </div>
-            <div *ngIf="data_saved === true">
-              your data is saved successfully and it will be reflected after
-              some time
-            </div>
-          </form>
+            </form>
+          </div>
+          <div
+            *ngIf="data_saved === true"
+            style="text-align: center; color: white"
+          >
+            your data is saved successfully and it will be reflected after some
+            time
+          </div>
         </div>
       </ng-template>
     </div>
@@ -366,146 +629,174 @@
 </div>
 
 <div class="all-activities">
-  <div class="row">
-    <div class="col-9">
-      <h1><strong style="margin-left: 10px">Activities </strong></h1>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-lg-4 col-md-4" *ngFor="let event of allEvents">
-      <a
-        (click)="open(allevent)"
-        (click)="data_saved = false"
-        (click)="recentactivity(event)"
-      >
-        <div class="card shadow rounded">
-          <img
-            src="{{ event.eventImage }}"
-            alt="background"
-            height="200px"
-            width="100%"
-          />
-          <div style="text-align: center">
-            {{ event.eventOn }} by {{ event.organizedBy }}<br />
-            at {{ event.organizedAt }}
+  <h2
+    style="
+      margin-left: 10px;
+      margin-top: 10px;
+      margin-bottom: 0px;
+      color: #b83227;
+    "
+  >
+    <strong>Activities </strong>
+  </h2>
+  <hr style="margin-top: -4px" />
+  <cdk-virtual-scroll-viewport [itemSize]="100" class="viewport-act">
+    <div class="row" style="padding: 0; width: 100%">
+      <div class="col-md-4 col-6" *cdkVirtualFor="let event of allEvents">
+        <a
+          (click)="open(allevent)"
+          (click)="data_saved = false"
+          (click)="recentactivity(event)"
+        >
+          <div class="card shadow rounded">
+            <img
+              src="{{ event.eventImage }}"
+              alt="background"
+              height="200px"
+              width="100%"
+            />
+            <div style="text-align: center">
+              {{ event.eventOn }} by {{ event.organizedBy }}<br />
+              at {{ event.organizedAt }}
+            </div>
           </div>
-        </div>
-      </a>
-      <ng-template #allevent let-modal>
-        <div class="modal-header" style="background-color: darkgrey">
-          <h5 class="modal-title" id="modal-basic-title">Activity Details</h5>
-          <button
-            type="button"
-            class="modal-cross"
-            aria-label="Close"
-            (click)="refresh()"
-            (click)="modal.dismiss('Cross click')"
-          >
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body" style="background-color: darkgrey">
-          <form [formGroup]="recentActivity">
-            <!---------------------image section---------------------->
-            <div *ngIf="url === ''">
-              <img src="{{ event.eventImage }}" height="200px" width="100%" />
-            </div>
-            <div *ngIf="url !== ''">
-              <img src="{{ url }}" height="200px" width="100%" />
-            </div>
-            <br />
-            <hr />
-            <input type="file" id="file" (change)="onselectrecent($event)" />
-            <div style="text-align: center; margin-top: -35px">
-              <label for="file" class="upload-button">change Image</label>
-            </div>
-            <br />
-            <!----------------------------------------------->
-
-            <div class="row">
-              <div class="col-md-6">
-                <mat-form-field appearance="fill">
-                  <mat-label>Choose an option</mat-label>
-                  <select matNativeControl formControlName="eventType">
-                    <option
-                      value="workshop"
-                      [selected]="event.eventType === 'workshop'"
-                    >
-                      workshop
-                    </option>
-                    <option
-                      value="celebration"
-                      [selected]="event.eventType === 'celebration'"
-                    >
-                      celebration
-                    </option>
-                    <option
-                      value="techbhukkads"
-                      [selected]="event.eventType === 'techbhukkads'"
-                    >
-                      techbhukkads
-                    </option>
-                  </select>
-                </mat-form-field>
-                <mat-form-field class="example-full-width">
-                  <mat-label>Event On</mat-label>
-                  <input
-                    formControlName="eventOn"
-                    matInput
-                    placeholder="Event On"
-                  />
-                </mat-form-field>
-              </div>
-              <div class="col-md-6">
-                <mat-form-field class="example-full-width">
-                  <mat-label>Organized By</mat-label>
-                  <input
-                    matInput
-                    formControlName="organizedBy"
-                    placeholder="Organized By"
-                  />
-                </mat-form-field>
-                <mat-form-field class="example-full-width">
-                  <mat-label>Organized At</mat-label>
-                  <input
-                    matInput
-                    formControlName="organizedAt"
-                    placeholder="Organized At"
-                  />
-                </mat-form-field>
-              </div>
-            </div>
-
-            <mat-form-field class="example-full-width">
-              <mat-label>Event Detail</mat-label>
-              <textarea
-                matInput
-                rows="5"
-                formControlName="eventDetails"
-                placeholder="Event Detail"
-              ></textarea>
-            </mat-form-field>
+        </a>
+        <ng-template #allevent let-modal>
+          <div class="modal-header" style="background-color: darkgrey">
+            <h5 class="modal-title" id="modal-basic-title">Activity Details</h5>
+            <button
+              type="button"
+              class="modal-cross"
+              aria-label="Close"
+              (click)="refresh()"
+              (click)="modal.dismiss('Cross click')"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" style="background-color: darkgrey">
             <div *ngIf="data_saved === false">
-              <input
-                type="submit"
-                value="Delete"
-                class="btn btn-danger btn-submit-delete"
-                (click)="deleteActivity(event._id)"
-              />
-              <input
-                type="submit"
-                value="Update"
-                class="btn btn-primary btn-submit"
-                (click)="updateActivity()"
-              />
+              <form [formGroup]="recentActivity">
+                <!---------------------image section---------------------->
+                <div *ngIf="url === ''">
+                  <img
+                    src="{{ event.eventImage }}"
+                    height="200px"
+                    width="100%"
+                  />
+                </div>
+                <div *ngIf="url !== ''">
+                  <img src="{{ url }}" height="200px" width="100%" />
+                </div>
+                <br />
+                <hr />
+                <input
+                  type="file"
+                  id="file"
+                  (change)="onselectrecent($event)"
+                />
+                <div style="text-align: center; margin-top: -35px">
+                  <label for="file" class="upload-button">change Image</label>
+                </div>
+                <br />
+                <!----------------------------------------------->
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <mat-form-field appearance="fill">
+                      <mat-label>Choose an option</mat-label>
+                      <select matNativeControl formControlName="eventType">
+                        <option
+                          value="workshop"
+                          [selected]="event.eventType === 'workshop'"
+                        >
+                          workshop
+                        </option>
+                        <option
+                          value="celebration"
+                          [selected]="event.eventType === 'celebration'"
+                        >
+                          celebration
+                        </option>
+                        <option
+                          value="techbhukkads"
+                          [selected]="event.eventType === 'techbhukkads'"
+                        >
+                          techbhukkads
+                        </option>
+                      </select>
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width">
+                      <mat-label>Event On</mat-label>
+                      <input
+                        formControlName="eventOn"
+                        matInput
+                        placeholder="Event On"
+                      />
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-6">
+                    <mat-form-field class="example-full-width">
+                      <mat-label>Organized By</mat-label>
+                      <input
+                        matInput
+                        formControlName="organizedBy"
+                        placeholder="Organized By"
+                      />
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width">
+                      <mat-label>Organized At</mat-label>
+                      <input
+                        matInput
+                        formControlName="organizedAt"
+                        placeholder="Organized At"
+                      />
+                    </mat-form-field>
+                  </div>
+                </div>
+
+                <mat-form-field class="example-full-width">
+                  <mat-label>Event Detail</mat-label>
+                  <textarea
+                    matInput
+                    rows="5"
+                    formControlName="eventDetails"
+                    placeholder="Event Detail"
+                  ></textarea>
+                </mat-form-field>
+
+                <input
+                  type="submit"
+                  value="Delete"
+                  class="btn btn-danger btn-submit-delete"
+                  (click)="deleteActivity(event._id)"
+                />
+                <input
+                  [class.d-none]="
+                    recentActivity.get('file').invalid ||
+                    recentActivity.get('eventType').invalid ||
+                    recentActivity.get('organizedBy').invalid ||
+                    recentActivity.get('eventOn').invalid ||
+                    recentActivity.get('organizedAt').invalid ||
+                    recentActivity.get('date').invalid
+                  "
+                  type="submit"
+                  value="Update"
+                  class="btn btn-primary btn-submit"
+                  (click)="updateActivity()"
+                />
+              </form>
             </div>
-            <div *ngIf="data_saved === true">
+            <div
+              *ngIf="data_saved === true"
+              style="text-align: center; color: white"
+            >
               your data is saved successfully and it will be reflected after
               some time
             </div>
-          </form>
-        </div>
-      </ng-template>
+          </div>
+        </ng-template>
+      </div>
     </div>
-  </div>
+  </cdk-virtual-scroll-viewport>
 </div>
