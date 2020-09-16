@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {catchError} from 'rxjs/operators';
 import {throwError} from 'rxjs';
-import {Activity} from './activities';
+import {Activity, Upcoming} from './activities';
 import {Observable} from 'rxjs/internal/Observable';
 import {environment} from '../../../environments/environment';
 
@@ -13,19 +13,26 @@ export class ActivityService {
   constructor(private http: HttpClient) {}
 
   addActivity(data: any) {
-    console.log('success!!');
     return this.http
       .post<any>(environment.server + '/post-event-detail', data)
       .pipe(catchError(this.handleError));
   }
   deleteActivity(data: {id: any}) {
-    console.log(data);
     return this.http
       .post<any>(environment.server + '/delete-event-detail', data)
       .pipe(catchError(this.handleError));
   }
+  updateUpcomingWithoutImage(data: any) {
+    return this.http
+      .post<any>(environment.server + '/update-upcoming-without-image', data)
+      .pipe(catchError(this.handleError));
+  }
+  updateUpcomingWithImage(data: any) {
+    return this.http
+      .post<any>(environment.server + '/update-upcoming-with-image', data)
+      .pipe(catchError(this.handleError));
+  }
   updateActivityWithoutImage(data: any) {
-    console.log(data);
     return this.http
       .post<any>(
         environment.server + '/update-event-detail-without-image',
@@ -34,9 +41,23 @@ export class ActivityService {
       .pipe(catchError(this.handleError));
   }
   updateActivityWithImage(data: any) {
-    console.log(data);
     return this.http
       .post<any>(environment.server + '/update-event-detail-with-image', data)
+      .pipe(catchError(this.handleError));
+  }
+  addUpcomingActivity(data) {
+    return this.http
+      .post<any>(environment.server + '/post-image-slider', data)
+      .pipe(catchError(this.handleError));
+  }
+  getUpcomingActivity(): Observable<Upcoming[]> {
+    return this.http
+      .get<Upcoming[]>(environment.server + '/get-image-slider')
+      .pipe(catchError(this.handleError));
+  }
+  deleteUpcoming(data) {
+    return this.http
+      .post<any>(environment.server + '/delete-upcoming-detail', data)
       .pipe(catchError(this.handleError));
   }
 

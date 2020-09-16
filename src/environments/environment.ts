@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  server: 'https://ooug-dev-1fbf3.el.r.appspot.com',
+  server: 'http://localhost:8080',
 };
 
 /*

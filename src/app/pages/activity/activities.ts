@@ -8,3 +8,8 @@ export interface Activity {
   organizedBy: string;
   organizedAt: string;
 }
+export interface Upcoming {
+  _id: string;
+  imageName: string;
+  url: string;
+}

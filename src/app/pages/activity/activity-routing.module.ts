@@ -9,6 +9,8 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
+import {ScrollingModule} from '@angular/cdk/scrolling';
+import {MatMenuModule} from '@angular/material/menu';
 
 const routes: Routes = [
   {
@@ -28,6 +30,8 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    ScrollingModule,
+    MatMenuModule,
   ],
   exports: [RouterModule],
 })
