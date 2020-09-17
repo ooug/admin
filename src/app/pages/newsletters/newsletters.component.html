@@ -6,50 +6,90 @@
   ></mat-spinner>
 </div>
 
-<mat-card>
-  <mat-card-header>
-    <mat-card-title>Send Newsletter</mat-card-title>
-    <mat-card-subtitle
-      >No Of Newsletter Subscriptions:
-      {{ subscriptions?.length }}</mat-card-subtitle
-    >
-  </mat-card-header>
-
-  <mat-card-content>
-    <form [formGroup]="sendNewsletterForm">
-      <mat-form-field color="accent" style="width: 100%">
-        <mat-label>Newsletter Subject</mat-label>
-        <input
-          required
-          formControlName="subject"
-          matInput
-          placeholder="Subject Line"
-        />
-        <mat-error *ngIf="sendNewsletterForm.value.subject === ''"
-          >Required</mat-error
+<br />
+<mat-tab-group color="accent" backgroundColor="accent">
+  <mat-tab label="Send NewsLetter">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Send Newsletter</mat-card-title>
+        <mat-card-subtitle
+          >No Of Newsletter Subscriptions:
+          {{ subscriptions?.length }}</mat-card-subtitle
         >
-      </mat-form-field>
-      NewLetter Content:
-      <ckeditor style="height: 100px" formControlName="html"></ckeditor>
-      <div style="margin-top: 3px">
-        <code>Enter</code> will insert a new paragraph.
-        <code>Shift+Enter</code> will insert a new line.
-      </div>
-      <br />
-      Attachment:
-      <input
-        type="file"
-        onclick="this.value = null"
-        (change)="onFileChange($event)"
-        formControlName="file"
-      />
-      (Max 5MB)
-    </form>
-  </mat-card-content>
+      </mat-card-header>
 
-  <mat-card-actions>
-    <button mat-raised-button color="accent" (click)="sendNewsletter()">
-      Send NewsLetter
-    </button>
-  </mat-card-actions>
-</mat-card>
+      <mat-card-content>
+        <form [formGroup]="sendNewsletterForm">
+          <mat-form-field color="accent" style="width: 100%">
+            <mat-label>Newsletter Subject</mat-label>
+            <input
+              required
+              formControlName="subject"
+              matInput
+              placeholder="Subject Line"
+            />
+            <mat-error *ngIf="sendNewsletterForm.value.subject === ''"
+              >Required</mat-error
+            >
+          </mat-form-field>
+          NewLetter Content:
+          <ckeditor style="height: 100px" formControlName="html"></ckeditor>
+          <div style="margin-top: 3px">
+            <code>Enter</code> will insert a new paragraph.
+            <code>Shift+Enter</code> will insert a new line.
+          </div>
+          <br />
+          Attachment:
+          <input
+            type="file"
+            onclick="this.value = null"
+            (change)="onFileChange($event)"
+            formControlName="file"
+          />
+          (Max 5MB)
+        </form>
+      </mat-card-content>
+
+      <mat-card-actions>
+        <button mat-raised-button color="accent" (click)="sendNewsletter()">
+          Send NewsLetter
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </mat-tab>
+  <mat-tab label="Newsletter History">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title> Newsletter History </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div *ngIf="newsletterHistory?.length === 0" style="text-align: center">
+          <h1>No History Found!</h1>
+        </div>
+        <mat-accordion *ngIf="newsletterHistory?.length > 0">
+          <mat-expansion-panel *ngFor="let history of newsletterHistory">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{ history.subject }}
+              </mat-panel-title>
+              <mat-panel-description>
+                On: {{ getDate(history.timeStamp) }}
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div [innerHTML]="history.body"></div>
+            <hr />
+            <div *ngIf="history.fileUrl">
+              <a
+                target="_blank"
+                mat-raised-button
+                color="accent"
+                href="{{ history.fileUrl }}"
+                >File</a
+              >
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </mat-card-content>
+    </mat-card>
+  </mat-tab>
+</mat-tab-group>

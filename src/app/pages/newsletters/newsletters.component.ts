@@ -11,6 +11,7 @@ export class NewslettersComponent implements OnInit {
   constructor(private newsletterService: NewsletterService) {}
 
   public subscriptions: any;
+  public newsletterHistory: any;
   public isLoading = false;
 
   public file = null;
@@ -70,14 +71,26 @@ export class NewslettersComponent implements OnInit {
     });
   }
 
+  public getDate(timeStamp: number) {
+    return new Date(timeStamp * 1000).toString();
+  }
+
   ngOnInit(): void {
-    console.log('Called');
     this.newsletterService
       .getNewsLetterSubscription()
       .then(data => {
         this.subscriptions = data;
       })
       .catch(err => {
+        console.log(err);
+      });
+    this.newsletterService
+      .getNewsletterHistory()
+      .then((history: any) => {
+        this.newsletterHistory = history;
+        console.log(this.newsletterHistory);
+      })
+      .catch((err: any) => {
         console.log(err);
       });
   }

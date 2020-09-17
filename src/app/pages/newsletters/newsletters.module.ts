@@ -11,6 +11,8 @@ import {MatButtonModule} from '@angular/material/button';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatTabsModule} from '@angular/material/tabs';
 
 @NgModule({
   declarations: [NewslettersComponent],
@@ -24,6 +26,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     ReactiveFormsModule,
     MatInputModule,
     MatProgressSpinnerModule,
+    MatExpansionModule,
+    MatTabsModule,
   ],
   providers: [NewsletterService],
 })

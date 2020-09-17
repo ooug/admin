@@ -43,4 +43,18 @@ export class NewsletterService {
         });
     });
   }
+
+  public getNewsletterHistory() {
+    return new Promise((resolve, reject) => {
+      this.http
+        .get(environment.server + '/app/get-newsletter-history')
+        .subscribe((data: any) => {
+          if (data.status) {
+            resolve(data.data);
+          } else {
+            reject(data);
+          }
+        });
+    });
+  }
 }
