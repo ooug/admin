@@ -78,6 +78,10 @@ export class ActivityComponent implements OnInit {
     this.upcomingEventDetail.get('url').setValue(event.url);
   }
   deleteUpcoming(id: any) {
+    const c = confirm('Are you sure?');
+    if (!c) {
+      return 0;
+    }
     this.activityService.deleteUpcoming({id: id}).subscribe(
       response => console.log('success!', response),
       error => (this.errorMsg = error)
@@ -178,6 +182,10 @@ export class ActivityComponent implements OnInit {
   }
 
   deleteActivity(id: any) {
+    const c = confirm('Are you sure?');
+    if (!c) {
+      return 0;
+    }
     this.activityService.deleteActivity({id: id}).subscribe(
       response => console.log('success!', response),
       error => (this.errorMsg = error)
