@@ -1,6 +1,6 @@
 <div *ngIf="errorMsg" class="alert alert-danger">Server is not responding</div>
 <div *ngIf="!errorMsg">
-  <a (click)="open(upload)">
+  <a (click)="refresh()" (click)="open(upload)">
     <div
       style="
         position: fixed;

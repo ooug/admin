@@ -22,3 +22,7 @@ mat-nav-list {
 .title {
   color: var(--color-white);
 }
+
+a:hover .icon {
+  color: var(--color-primary);
+}
