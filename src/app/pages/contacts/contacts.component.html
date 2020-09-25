@@ -1,1 +1,31 @@
-<p>contacts works!</p>
+<div class="noReqFoundDiv" *ngIf="requests?.length === 0">
+  <mat-card><h2>No Request Found!</h2></mat-card>
+</div>
+<div class="requestDiv" *ngIf="requests?.length > 0">
+  <mat-card>
+    <mat-accordion>
+      <mat-expansion-panel *ngFor="let req of requests">
+        <mat-expansion-panel-header>
+          <mat-panel-title> {{ req.name }} </mat-panel-title>
+          <mat-panel-description>
+            {{ req.subject }}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <table border="1">
+          <tr>
+            <th>Email</th>
+            <td>{{ req.email }}</td>
+          </tr>
+          <tr>
+            <th>Date/Time</th>
+            <td>{{ getDate(req.timeStamp) }}</td>
+          </tr>
+          <tr>
+            <th>Message</th>
+            <td>{{ req.message }}</td>
+          </tr>
+        </table>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </mat-card>
+</div>

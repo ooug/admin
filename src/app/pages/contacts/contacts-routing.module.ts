@@ -10,7 +10,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [ContactsComponent],
+  declarations: [],
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })

@@ -2652,6 +2652,14 @@ circular-dependency-plugin@5.2.0:
   resolved "https://registry.yarnpkg.com/circular-dependency-plugin/-/circular-dependency-plugin-5.2.0.tgz#e09dbc2dd3e2928442403e2d45b41cea06bc0a93"
   integrity sha512-7p4Kn/gffhQaavNfyDFg7LS5S/UT1JAjyGd4UqR2+jzoYF02eDkj0Ec3+48TsIa4zghjLY87nQHIh/ecK9qLdw==
 
+ckeditor4-angular@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/ckeditor4-angular/-/ckeditor4-angular-1.3.0.tgz#fc677fc9d771971e35ac8061b4fd509839e8b807"
+  integrity sha512-+xWaI0fKIWq0V3ItWikgkgoWjpijF1g/rVgkueZCVWA9aVw7dDUdA+wlQ48yDbZeb3ODrdIZqDnyqnD8mIXM4w==
+  dependencies:
+    load-script "^1.0.0"
+    tslib "^1.9.0"
+
 class-utils@^0.3.5:
   version "0.3.6"
   resolved "https://registry.yarnpkg.com/class-utils/-/class-utils-0.3.6.tgz#f93369ae8b9a7ce02fd41faad0ca83033190c463"
@@ -6036,6 +6044,11 @@ live-server@^1.2.1:
     proxy-middleware latest
     send latest
     serve-index "^1.9.1"
+
+load-script@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/load-script/-/load-script-1.0.0.tgz#0491939e0bee5643ee494a7e3da3d2bac70c6ca4"
+  integrity sha1-BJGTngvuVkPuSUp+PaPSuscMbKQ=
 
 loader-runner@^2.4.0:
   version "2.4.0"
