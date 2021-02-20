@@ -2,6 +2,9 @@
   "name": "admin",
   "version": "0.0.0",
   "private": true,
+  "engines": {
+    "node": "14"
+  },
   "scripts": {
     "prebuild": "rimraf dist",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.scss\" \"src/**/*.html\" \"e2e/**/*.ts\"",

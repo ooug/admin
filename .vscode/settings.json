@@ -4,8 +4,13 @@
         "ampm",
         "bloburl",
         "ckeditor",
+        "codelyzer",
+        "compodoc",
         "deeppurple",
+        "devkit",
+        "jasminewd",
         "jspdf",
-        "ooug"
+        "ooug",
+        "prebuild"
     ]
 }
